@@ -1,16 +1,11 @@
 <script>
-
+    
 </script>
 
 <div class="container center_align">
-    <form on:submit|preventDefault={()=>console.log('searching')} class="search_form center_align" onsubmit="" id="search_form">
+    <form on:submit|preventDefault={window.api.startSession} class="search_form center_align" onsubmit="" id="search_form">
         <input class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
-    <script src="../renderer.js"></script>
-    <script>
-        //     window.electronAPI.startSession();
-        //     window.electronAPI.search(input.value);
-    </script>   
 </div>
     
 
