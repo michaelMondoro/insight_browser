@@ -1,9 +1,17 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const { startSession } = require("./backend.cjs")
+const Session = require("./Session.cjs");
+const { start } = require("repl");
 
 app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
+let user_session;
+
+
+function startSession() {
+  user_session = new Session();
+  user_session.startSession();
+}
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
@@ -16,8 +24,7 @@ app.on("ready", () => {
     }
   });
   mainWindow.loadFile(path.join(__dirname, "public/index.html"));
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
  ipcMain.on("startSession", startSession); 
-
 });
