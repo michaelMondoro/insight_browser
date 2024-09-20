@@ -7,8 +7,6 @@
         <input class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
-    
-
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');

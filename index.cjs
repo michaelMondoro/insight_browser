@@ -1,12 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const { startSession } = require("./backend.cjs")
+
 app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
 
-function startSession() {
-  console.log("session started");
-  
-}
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     width: 800,
