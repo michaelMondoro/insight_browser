@@ -12,7 +12,7 @@ app.on("ready", () => {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js")
+      preload: path.join(__dirname, "electron/preload.js")
     }
   });
   mainWindow.loadFile(path.join(__dirname, "public/index.html"));
