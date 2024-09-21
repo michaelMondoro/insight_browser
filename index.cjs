@@ -10,10 +10,6 @@ app.commandLine.appendSwitch('disable-gpu'); // WHY??
 let mainWindow;
 let user_session = new Session();
 
-function startSession() {
-  user_session.startSession();
-}
-
 function monitor() {
   // Intercept HTTP requests
   const ses = session.defaultSession;
@@ -32,8 +28,7 @@ app.on("ready", () => {
   monitor(); 
   
   // recieve calls from front-end
-  ipcMain.on("startSession", startSession); 
-
+  ipcMain.on("startSession", () => user_session.startSession()); 
 
   // mainWindow.webContents.openDevTools();
 });
