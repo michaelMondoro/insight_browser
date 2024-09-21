@@ -9,6 +9,7 @@ module.exports = {
           webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
+            webviewTag: true,
             preload: path.join(__dirname, "../electron/preload.js")
           }
         });

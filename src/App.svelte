@@ -1,17 +1,17 @@
 <script>
     import SearchWindow from "./SearchWindow.svelte";
-    $: search = false;
-
+    $: activeSearch = false;
+    let searchQuery;
 </script>
 
-{#if !search}
+{#if !activeSearch}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();search=true}} class="search_form center_align" onsubmit="" id="search_form">
-        <input class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
+    <form on:submit|preventDefault={() => {window.api.startSession();activeSearch = true;}} class="search_form center_align" onsubmit="" id="search_form">
+        <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
 {:else}
-<SearchWindow />
+<SearchWindow query={searchQuery}/>
 {/if}
 
 
@@ -21,7 +21,6 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@100&display=swap');
-
 
 .center_align {
     display: flex;

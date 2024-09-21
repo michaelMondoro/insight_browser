@@ -1,9 +1,9 @@
 <script>
-
+    export let query = '';
 </script>
 
 <div class="container center_align">
-    <h3>Search Window</h3>
+    <webview id="webpage" src={`https://duckduckgo.com/?q=${encodeURIComponent(query)}`} style="width: 100%; height: 100%;"></webview>
 </div>
 
 <style>
