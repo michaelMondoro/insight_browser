@@ -1,30 +1,40 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, session, ipcMain } = require("electron");
 const path = require("path");
-const Session = require("./Session.cjs");
-const { start } = require("repl");
+
+const { Session } = require("./Session.cjs");
+const { processRequest } = require("./utils/http.cjs");
+const { createWindow } = require("./utils/ui.cjs")
 
 app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
-let user_session;
-
+let mainWindow;
+let user_session = new Session();
 
 function startSession() {
-  user_session = new Session();
   user_session.startSession();
+  mainWindow.loadURL("https://start.duckduckgo.com");
 }
 
-app.on("ready", () => {
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
-      preload: path.join(__dirname, "electron/preload.js")
+function monitor() {
+  // Intercept HTTP requests
+  const ses = session.defaultSession;
+  ses.webRequest.onResponseStarted((details) => {
+    if (user_session != undefined && user_session.active) {
+      processRequest(details);
     }
   });
-  mainWindow.loadFile(path.join(__dirname, "public/index.html"));
-  // mainWindow.webContents.openDevTools();
+}
 
- ipcMain.on("startSession", startSession); 
+
+app.on("ready", () => {
+  mainWindow = createWindow();
+  mainWindow.loadFile(path.join(__dirname, "public/index.html"));
+
+  monitor(); 
+  
+  // recieve calls from front-end
+  ipcMain.on("startSession", startSession); 
+
+
+  // mainWindow.webContents.openDevTools();
 });

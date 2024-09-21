@@ -1,16 +1,19 @@
 class Session {
     constructor() {
-      this.userIP = null;
+      this.userIP = this.getIP(); 
       this.active = false;
       this.sitesVisited = [];
     }
 
-    async startSession() {
+    async getIP() {
       const res = await fetch('http://api.ipify.org/');
-      this.userIP = await res.text();
+      console.log('successfully got IP');
+      return await res.text();
+    }
+    
+    startSession() {
       this.active = true;
-      console.log(`Session started for IP: ${this.userIP}`);
-      
+      console.log(`Session started for IP: ${this.userIP}`);      
     }
   
     endSession() {
@@ -26,4 +29,4 @@ class Session {
       };
     }
 }
-module.exports = Session;
+module.exports = {Session};
