@@ -1,5 +1,6 @@
 <script>
-
+    let requestCount = 0;
+    window.api.updateRequestCount(() => {requestCount+=1})
 </script>
 <main>
     <div class="banner">
@@ -8,7 +9,7 @@
             <i class="icon fa fa-angle-right" onclick="goForward()"></i>
         </span>
         <span>
-            <span id="count" class="highlight" data-tooltip="requests">0</span>
+            <span contenteditable bind:textContent={requestCount} id="count" class="highlight" data-tooltip="requests">0</span>
             <span id="status" class="status"></span>
             <button onclick="stopSession()"><span>stop</span></button>
         </span>

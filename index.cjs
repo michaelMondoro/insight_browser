@@ -16,6 +16,7 @@ function monitor() {
   ses.webRequest.onResponseStarted((details) => {
     if (user_session != undefined && user_session.active) {
       processRequest(details);
+      mainWindow.webContents.send("updateRequestCount");
     }
   });
 }

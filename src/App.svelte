@@ -36,7 +36,7 @@
 
 
 .search_form {
-    width: 100%;
+    width: 60%;
     height: 100%;
 }
 input {
@@ -56,6 +56,6 @@ Animations
 */
 @keyframes fadeInSearch {
     0% {width: 0%}
-    100% {width: 35%}
+    100% {width: 75%;}
 }
 </style>
