@@ -1,7 +1,9 @@
 <script>
+    import NavBar from "./NavBar.svelte";
     export let query = '';
 </script>
 
+<NavBar />
 <div class="container center_align">
     <webview id="webpage" src={`https://duckduckgo.com/?q=${encodeURIComponent(query)}`} style="width: 100%; height: 100%;"></webview>
 </div>
