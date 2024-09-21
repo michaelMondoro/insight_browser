@@ -1,8 +1,16 @@
 class Session {
     constructor() {
-      this.userIP = this.getIP(); 
+      this.userIP = null;
       this.active = false;
       this.sitesVisited = [];
+      this.init();
+    }
+    async init() {
+      try {
+          this.userIP = await this.getIP();
+      } catch (error) {
+          console.error('Failed to get IP:', error);
+      }
     }
 
     async getIP() {
