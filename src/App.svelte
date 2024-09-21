@@ -1,31 +1,62 @@
 <script>
-    import MainWindow from "./MainWindow.svelte";
+    import SearchWindow from "./SearchWindow.svelte";
+    $: search = false;
 
-	export let name;
 </script>
 
-<main>
-	<MainWindow />
-</main>
+{#if !search}
+<div class="container center_align">
+    <form on:submit|preventDefault={() => {window.api.startSession();search=true}} class="search_form center_align" onsubmit="" id="search_form">
+        <input class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
+    </form>   
+</div>
+{:else}
+<SearchWindow />
+{/if}
+
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@100&display=swap');
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+.center_align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    height: 100vh;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+.search_form {
+    width: 100%;
+    height: 100%;
+}
+input {
+    all: unset;
+}
+
+.search {
+    border: none;
+    text-align: left;
+    border-bottom: solid black 1px;
+    width: 10%;
+    transform: all 3s;
+    animation:  3s ease forwards fadeInSearch ;
+}
+/*
+Animations
+*/
+@keyframes fadeInSearch {
+    0% {width: 0%}
+    100% {width: 35%}
+}
 </style>

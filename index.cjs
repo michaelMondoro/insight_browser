@@ -3,7 +3,7 @@ const path = require("path");
 
 const { Session } = require("./Session.cjs");
 const { processRequest } = require("./utils/http.cjs");
-const { createWindow } = require("./utils/ui.cjs")
+const { createWindow, loadPage } = require("./utils/ui.cjs")
 
 app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
@@ -12,7 +12,6 @@ let user_session = new Session();
 
 function startSession() {
   user_session.startSession();
-  mainWindow.loadURL("https://start.duckduckgo.com");
 }
 
 function monitor() {
