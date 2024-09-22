@@ -8,15 +8,15 @@ const { createWindow, loadPage } = require("./utils/ui.cjs")
 app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
 let mainWindow;
-let user_session = new Session();
+let userSession = new Session();
 
 function monitor() {
   // Intercept HTTP requests
   const ses = session.defaultSession;
   ses.webRequest.onResponseStarted((details) => {
-    if (user_session != undefined && user_session.active) {
+    if (userSession != undefined && userSession.active) {
       var data = processRequest(details);
-      user_session.addRequest(data);
+      userSession.addRequest(data);
       mainWindow.webContents.send("updateRequestCount");
     }
   });
@@ -30,10 +30,10 @@ app.on("ready", () => {
   monitor(); 
   
   // recieve calls from front-end
-  ipcMain.on("startSession", () => user_session.startSession()); 
-  ipcMain.on("stopSession", () => user_session.endSession());
+  ipcMain.on("startSession", () => userSession.startSession()); 
+  ipcMain.on("stopSession", () => userSession.endSession());
  
   // send data to front-end
-  ipcMain.handle("loadSession", () => {return user_session})
+  ipcMain.handle("loadSession", () => {return userSession})
   // mainWindow.webContents.openDevTools();
 });
