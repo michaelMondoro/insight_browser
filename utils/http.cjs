@@ -18,6 +18,7 @@ module.exports = {
             'geo' : geoData
             }
             console.log(data);
+            return data;
         }
     }
 }

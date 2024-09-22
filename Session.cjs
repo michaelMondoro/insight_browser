@@ -2,7 +2,7 @@ class Session {
     constructor() {
       this.userIP = null;
       this.active = false;
-      this.sitesVisited = [];
+      this.requests = [];
       this.init();
     }
     async init() {
@@ -29,11 +29,15 @@ class Session {
       console.log("Session ended for IP:", this.userIP);
     }
   
+    addRequest(request) {
+      this.requests.push(request);
+    }
+    
     getSessionData() {
       return {
         userIP: this.userIP,
         active: this.active,
-        sitesVisited: this.sitesVisited
+        requests: this.requests
       };
     }
 }

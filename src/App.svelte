@@ -1,17 +1,27 @@
 <script>
     import SearchWindow from "./SearchWindow.svelte";
-    $: activeSearch = false;
+    import NavBar from "./NavBar.svelte";
+    import Dashboard from "./Dashboard.svelte"
+    
+    $: screen = "main";
     let searchQuery;
 </script>
 
-{#if !activeSearch}
+<!-- Main Screen -->
+{#if screen === "main"}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();activeSearch = true;}} class="search_form center_align" onsubmit="" id="search_form">
+    <form on:submit|preventDefault={() => {window.api.startSession();screen = "search"}} class="search_form center_align" onsubmit="" id="search_form">
         <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
-{:else}
-<SearchWindow query={searchQuery}/>
+<!-- Search Result Screen -->
+{:else if screen === "search"}
+<div style="height: 100%; width: 100%; display: flex; flex-direction: column">
+    <NavBar on:update={() => { window.api.stopSession();screen = "dashboard"}}/>
+    <SearchWindow query={searchQuery}/>
+</div>
+{:else if screen === "dashboard"}
+    <Dashboard />
 {/if}
 
 

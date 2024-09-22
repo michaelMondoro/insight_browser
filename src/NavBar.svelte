@@ -1,4 +1,7 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+    const endSessionDispatcher = createEventDispatcher();
+
     let requestCount = 0;
     window.api.updateRequestCount(() => {requestCount+=1})
 </script>
@@ -11,7 +14,7 @@
         <span>
             <span contenteditable bind:textContent={requestCount} id="count" class="highlight" data-tooltip="requests">0</span>
             <span id="status" class="status"></span>
-            <button onclick="stopSession()"><span>stop</span></button>
+            <button on:click={() => {endSessionDispatcher('update', true)}}><span>stop</span></button>
         </span>
     </div>
     <script>
@@ -23,10 +26,6 @@
         function goForward() {
             var webview = document.getElementById("webpage");
             webview.goForward()
-        }
-
-        function stopSession() {
-            window.api.stopSession();
         }
     </script>
 </main>
