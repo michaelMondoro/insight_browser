@@ -2,7 +2,8 @@ class Session {
     constructor() {
       this.userIP = null;
       this.active = false;
-      this.requests = [];
+      this.hosts = {};
+      this.count = 0;
       this.init();
     }
     async init() {
@@ -28,16 +29,22 @@ class Session {
       this.active = false;
       console.log("Session ended for IP:", this.userIP);
     }
-  
+    
     addRequest(request) {
-      this.requests.push(request);
+      var hostname = request.hostname;
+      if (this.hosts[hostname]) {
+        this.hosts[hostname].push(request);
+      } else {
+        this.hosts[hostname] = [request];
+      }
+      this.count += 1;
     }
     
     getSessionData() {
       return {
         userIP: this.userIP,
         active: this.active,
-        requests: this.requests
+        hosts: this.hosts
       };
     }
 }

@@ -17,7 +17,6 @@ module.exports = {
             'statusCode': details.statusCode,
             'geo' : geoData
             }
-            console.log(data);
             return data;
         }
     }

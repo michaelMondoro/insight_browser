@@ -16,8 +16,10 @@ function monitor() {
   ses.webRequest.onResponseStarted((details) => {
     if (userSession != undefined && userSession.active) {
       var data = processRequest(details);
-      userSession.addRequest(data);
-      mainWindow.webContents.send("updateRequestCount");
+      if (data) {
+        userSession.addRequest(data);
+        mainWindow.webContents.send("updateRequestCount");
+      }
     }
   });
 }
@@ -27,6 +29,9 @@ app.on("ready", () => {
   mainWindow = createWindow();
   mainWindow.loadFile(path.join(__dirname, "public/index.html"));
 
+  console.log('removing localstorage');
+  mainWindow.webContents.executeJavaScript('localStorage.clear();');
+  
   monitor(); 
   
   // recieve calls from front-end
