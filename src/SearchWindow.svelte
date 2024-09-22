@@ -10,7 +10,6 @@
     </div>
 </div>
 
-
 <style>
 .center_align {
     display: flex;
