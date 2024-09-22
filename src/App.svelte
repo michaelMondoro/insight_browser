@@ -2,15 +2,26 @@
     import SearchWindow from "./SearchWindow.svelte";
     import NavBar from "./NavBar.svelte";
     import Dashboard from "./Dashboard.svelte"
+    import { onDestroy, onMount } from "svelte";
     
-    $: screen = "main";
+    $: screen = "dashboard";
     let searchQuery;
+
+    onMount(() => {
+        // const val = localStorage.getItem('screen');
+        // const query = localStorage.getItem('searchQuery');
+        // console.log(`${val} -- ${query}`); 
+        // if (val) screen = val;
+        // if (query) searchQuery = searchQuery;
+    })
+
+
 </script>
 
 <!-- Main Screen -->
 {#if screen === "main"}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();screen = "search"}} class="search_form center_align" onsubmit="" id="search_form">
+    <form on:submit|preventDefault={() => {window.api.startSession();screen = "search";}} class="search_form center_align" onsubmit="" id="search_form">
         <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
@@ -23,7 +34,6 @@
 {:else if screen === "dashboard"}
     <Dashboard />
 {/if}
-
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');

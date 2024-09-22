@@ -1,6 +1,8 @@
 <script>
     import { onMount } from "svelte";
 
+    let selectedPage = "Summary";
+
     onMount(async () => {
         console.log('loading data....');
         var data = await window.api.loadSession();
@@ -8,13 +10,20 @@
     })
 </script>
 
-<div class="dashboard">
-    <h3>Dashboard</h3>
+<div class="container">
+    <div class="sidebar">
+        <button class:highlighted={selectedPage === "Summary"} on:click={() => selectedPage = "Summary"} class="menu_item">Summary</button>
+        <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} class="menu_item">Hosts</button>
+        <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} class="menu_item">Requests</button>
+    </div>
+    <div class="dashboard">
+        <h3>Dashboard</h3>
+    </div>    
 </div>
 
 
 <style>
-    .loader {
+.loader {
     width: 48px;
     height: 48px;
     border: 5px solid #4a76e8;
@@ -32,7 +41,7 @@
     100% {
         transform: rotate(360deg);
     }
-    } 
+} 
 :root {
     --success-value: 10%;
     --request-value: 0%;
@@ -43,18 +52,9 @@
     --circle-bg: rgb(212, 209, 209);
 }
 button {
-    appearance: none;
-    background-color:rgba(255, 255, 255, 0);
-    border: solid grey 1px;
-    padding: .5em 1em;
-    border-radius: .2em;
-    transition: all .5s;
-}
-button:hover {
-    cursor: pointer;
-    border-radius: 1em;
-    color:white;
-    background-color: black;
+    all: unset;
+    width: 100%;
+    text-align: right;
 }
 * {
     font-size: 1rem;
@@ -67,11 +67,26 @@ button:hover {
     height: 100%;
 }
 
-.stats {
+.container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2em;
-    /* width: 100%; */
+    grid-template-columns: 1fr 5fr;
+}
+
+.sidebar {
+
+}
+
+.menu_item {
+    margin: 0;
+    padding: 1em;
+}
+.menu_item:hover {
+    cursor: pointer;
+    background-color: rgb(245, 245, 245);
+}
+
+.highlighted {
+    background-color: rgb(245, 245, 245);
 }
 
 @media screen and (max-width: 800px) {
