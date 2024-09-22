@@ -30,6 +30,7 @@ app.on("ready", () => {
   
   // recieve calls from front-end
   ipcMain.on("startSession", () => user_session.startSession()); 
-
+  ipcMain.on("stopSession", () => {user_session.endSession()});
+  
   // mainWindow.webContents.openDevTools();
 });

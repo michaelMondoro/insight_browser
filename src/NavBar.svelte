@@ -24,6 +24,10 @@
             var webview = document.getElementById("webpage");
             webview.goForward()
         }
+
+        function stopSession() {
+            window.api.stopSession();
+        }
     </script>
 </main>
 
