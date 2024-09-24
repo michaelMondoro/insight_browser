@@ -1,6 +1,9 @@
+const geo = require("./utils/geo.cjs")
+
 class Session {
     constructor() {
       this.userIP = null;
+      this.location = null;
       this.active = false;
       this.hosts = {};
       this.count = 0;
@@ -9,6 +12,7 @@ class Session {
     async init() {
       try {
           this.userIP = await this.getIP();
+          this.location = geo.getIP(this.userIP);
       } catch (error) {
           console.error('Failed to get IP:', error);
       }
