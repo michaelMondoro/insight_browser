@@ -22,9 +22,11 @@
     <div class="dashboard">
         {#if selectedPage === "Summary"}
             {#if loading}
-                <span class="loader"></span>
+                <div style="height: 100%; display: flex; flex-direction: column; justify-content:center; align-items:center">
+                    <span class="loader"></span>
+                </div>
             {:else}
-                <SummaryPage data={data}/>
+            <SummaryPage data={data}/>
             {/if}
         {:else if selectedPage === "Hosts"}
             <h2>Hosts</h2>
@@ -44,7 +46,7 @@
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: rotation .5s linear infinite;
     }
 
     @keyframes rotation {
@@ -67,7 +69,6 @@
 button {
     all: unset;
     width: 100%;
-    text-align: right;
 }
 * {
     font-size: 1rem;
@@ -75,38 +76,42 @@ button {
 
 .dashboard {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    padding: 2em;
 }
 
 .container {
     display: grid;
     grid-template-columns: 1fr 10fr;
+    height: 100%;
 }
 
 .sidebar {
-    /* padding: 1em; */
+    height: 100%;
+    width: 50px;
 }
 
 .menu_item {
-    margin: 0;
-    padding: 1em 0em;
+    margin: .5em;
+    padding: .5em;
+    font-size: 1em;
+    color: #9a9b9c;
     text-align: center;
 }
 
 .menu_item:hover {
     cursor: pointer;
-    /* background-color: rgb(245, 245, 245); */
-    box-shadow: 7px 0 3px -6px black;
-    transform: scale(1.05);
+    transform: scale(1.1); 
+    color: #363636;
+    border-right: solid #363636 1px;
 }
 
 .highlighted {
-    /* background-color: rgb(245, 245, 245); */
-    box-shadow: 7px 0 3px -6px black;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    color: #363636;
+    border-right: solid #363636 1px;
 }
 
 @media screen and (max-width: 800px) {

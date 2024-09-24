@@ -13,7 +13,7 @@
     align-items: center;
 }
 .container {
-    height: 100vh;
+    height: 100%;
     padding: 0;
     font-family: "Montserrat", sans-serif;
 }
