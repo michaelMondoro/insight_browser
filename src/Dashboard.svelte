@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import SummaryPage from "./SummaryPage.svelte";
+    import Header from "./Header.svelte";
 
     let selectedPage = "Summary";
     let loading = true;
@@ -13,7 +14,7 @@
     })
 </script>
 
-<div class="container">
+<div class="container">    
     <div class="sidebar">
         <button class:highlighted={selectedPage === "Summary"} on:click={() => selectedPage = "Summary"} title="summary" class="menu_item"><i class="fa fa-desktop" aria-hidden="true"></i></button>
         <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} title="hosts" class="menu_item"><i class="fa fa-server" aria-hidden="true"></i></button>
@@ -26,11 +27,14 @@
                     <span class="loader"></span>
                 </div>
             {:else}
+            <Header data={data}/>
             <SummaryPage data={data}/>
             {/if}
         {:else if selectedPage === "Hosts"}
+            <Header data={data}/>
             <h2>Hosts</h2>
         {:else if selectedPage === "Requests"}
+            <Header data={data}/>
             <h2>Requests</h2>
         {/if}
     </div>    
@@ -79,7 +83,7 @@ button {
     /* justify-content: space-between; */
     align-items: center;
     flex-direction: column;
-    padding: 2em;
+    padding: 1em;
 }
 
 .container {
