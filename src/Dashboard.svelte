@@ -2,12 +2,14 @@
     import { onMount } from "svelte";
     import SummaryPage from "./SummaryPage.svelte";
     import Header from "./Header.svelte";
+    import Loader from "./Loader.svelte";
+    import Select from "./Select.svelte";
 
     let selectedPage = "Summary";
     let loading = true;
     $: data = undefined;
+
     onMount(async () => {
-        console.log('loading data....');
         data = await window.api.loadSession();
         loading = false;
         console.log(data);
@@ -23,16 +25,14 @@
     <div class="dashboard">
         {#if selectedPage === "Summary"}
             {#if loading}
-                <div style="height: 100%; display: flex; flex-direction: column; justify-content:center; align-items:center">
-                    <span class="loader"></span>
-                </div>
+                <Loader />
             {:else}
             <Header data={data}/>
             <SummaryPage data={data}/>
             {/if}
         {:else if selectedPage === "Hosts"}
             <Header data={data}/>
-            <h2>Hosts</h2>
+            <Select data={data}/>
         {:else if selectedPage === "Requests"}
             <Header data={data}/>
             <h2>Requests</h2>
@@ -40,40 +40,13 @@
     </div>    
 </div>
 
-
 <style>
-.loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #4a76e8;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation .5s linear infinite;
-    }
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-} 
-:root {
-    --success-value: 10%;
-    --request-value: 0%;
-    --circle-size: 8em;
-    --success-color: rgb(40, 128, 10);
-    --post-color: rgb(47, 130, 232);
-    --fail-color: rgb(247, 55, 55);
-    --circle-bg: rgb(212, 209, 209);
-}
 button {
     all: unset;
     width: 100%;
 }
+
 * {
     font-size: 1rem;
 }
@@ -116,11 +89,5 @@ button {
     transform: scale(1.1);
     color: #363636;
     border-right: solid #363636 1px;
-}
-
-@media screen and (max-width: 800px) {
-  .stats {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 </style>

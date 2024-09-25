@@ -4,7 +4,7 @@
     import Dashboard from "./Dashboard.svelte"
     import { onDestroy, onMount } from "svelte";
     
-    $: screen = "main";
+    $: screen = "dashboard";
     let searchQuery;
 
     onMount(() => {
