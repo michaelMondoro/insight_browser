@@ -11,7 +11,7 @@ module.exports = {
                 'city': record['city']['names']['en'],
                 'country': record['country']['names']['en'],
                 'country_code': record['country']['iso_code'],
-                'location': record['location']
+                'coordinates': record['location']
             }
         }
         return data;

@@ -23,13 +23,13 @@
 	// }
 
 	onMount(() => {
-		map = L.map("map",{}).setView([data.location.location.latitude, data.location.location.longitude], 8);
+		map = L.map("map",{}).setView([data.location.coordinates.latitude, data.location.coordinates.longitude], 8);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 30,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 
-		var marker = L.circle([data.location.location.latitude, data.location.location.longitude],{
+		var marker = L.circle([data.location.coordinates.latitude, data.location.coordinates.longitude],{
 			color:'red', 
 			fillColor:"#f03", 
 			radius: 5000})
