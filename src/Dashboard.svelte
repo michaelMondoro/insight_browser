@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
     import SummaryPage from "./SummaryPage.svelte";
     import Header from "./components/Header.svelte";
     import Loader from "./components/Loader.svelte";
@@ -19,7 +18,6 @@
         {#await window.api.loadSession()}
             <Loader /> 
         {:then data} 
-        {console.log(data)}
         <Header data={data}/>
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>

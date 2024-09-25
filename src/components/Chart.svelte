@@ -37,10 +37,10 @@
     })
 </script>
 <div class="container">
+    <h3>{title}</h3>
     <div style="display: relative; width: 100%; height: auto;">
         <canvas bind:this={chartTag} id="myChart"></canvas>
     </div>
-    <h3>{title}</h3>
 </div>
 <style>
 .container {
