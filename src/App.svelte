@@ -9,11 +9,7 @@
 
     onMount(() => {
         const currentScreen = sessionStorage.getItem('currentScreen');
-        if (currentScreen) {
-            screen = currentScreen;
-        } else {
-            screen = 'main';
-        }
+        screen = currentScreen ? currentScreen : 'main';
     });
 
     function changeScreen(newScreen) {

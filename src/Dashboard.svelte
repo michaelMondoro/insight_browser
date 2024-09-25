@@ -6,14 +6,7 @@
     import Select from "./components/Select.svelte";
 
     let selectedPage = "Summary";
-    let loading = true;
-    $: data = undefined;
 
-    onMount(async () => {
-        data = await window.api.loadSession();
-        loading = false;
-        console.log(data);
-    })
 </script>
 
 <div class="container">    
@@ -23,20 +16,19 @@
         <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} title="requests" class="menu_item"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
     </div>
     <div class="dashboard">
-        {#if selectedPage === "Summary"}
-            {#if loading}
-                <Loader />
-            {:else}
-            <Header data={data}/>
-            <SummaryPage data={data}/>
+        {#await window.api.loadSession()}
+            <Loader /> 
+        {:then data} 
+        <Header data={data}/>
+            {#if selectedPage === "Summary"}
+                <SummaryPage data={data}/>
+            {:else if selectedPage === "Hosts"}
+                <h3>Hosts</h3>
+                <Select data={data}/>
+            {:else if selectedPage === "Requests"}
+                <h3>Requests</h3>
             {/if}
-        {:else if selectedPage === "Hosts"}
-            <Header data={data}/>
-            <Select data={data}/>
-        {:else if selectedPage === "Requests"}
-            <Header data={data}/>
-            <h2>Requests</h2>
-        {/if}
+        {/await} 
     </div>    
 </div>
 

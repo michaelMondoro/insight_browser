@@ -4,6 +4,9 @@
     
     export let data;
 </script>
+<div style="width: 100%;">
+    <h3>Summary</h3>
+</div>
 
 <Map data={data}/>
 <br>
@@ -23,5 +26,7 @@
 .stat {
     text-align: left;
 }
-
+h3 {
+    text-align: left;
+}
 </style>
