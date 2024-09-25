@@ -1,6 +1,6 @@
 <script>
-    import Map from "./Map.svelte";
-    import Chart from "./Chart.svelte";
+    import Map from "./components/Map.svelte";
+    import Chart from "./components/Chart.svelte";
     
     export let data;
 </script>

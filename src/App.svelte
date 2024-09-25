@@ -1,10 +1,10 @@
 <script>
     import SearchWindow from "./SearchWindow.svelte";
-    import NavBar from "./NavBar.svelte";
+    import NavBar from "./components/NavBar.svelte";
     import Dashboard from "./Dashboard.svelte"
     import { onDestroy, onMount } from "svelte";
     
-    $: screen = "dashboard";
+    $: screen = "main";
     let searchQuery;
 
     onMount(() => {

@@ -1,9 +1,9 @@
 <script>
     import { onMount } from "svelte";
     import SummaryPage from "./SummaryPage.svelte";
-    import Header from "./Header.svelte";
-    import Loader from "./Loader.svelte";
-    import Select from "./Select.svelte";
+    import Header from "./components/Header.svelte";
+    import Loader from "./components/Loader.svelte";
+    import Select from "./components/Select.svelte";
 
     let selectedPage = "Summary";
     let loading = true;
