@@ -5,22 +5,19 @@
 	export let data;
 	let map;
 	
-	// $: {
-	// 	async function load() {
-	// 		if (data !== null) {
-	// 			for (let host in data) {
-	// 				let lat = data[host].lat + (Math.random() * (.01 - .02) + .02)
-	// 				let long = data[host].long + (Math.random() * (.01 - .02) + .02)
-	// 				var marker = L.marker([lat, long])
-	// 				marker.bindTooltip(`<b>${host} (${data[host].total})</b> <br>[${data[host].ip}]`)
-	// 				marker.bindPopup(`<b>${host}</b>`);
-	// 				marker.addTo(map);
-	// 			}
-	// 		}
-	// 	}
-	// 	load()
-	// 	console.log(data)
-	// }
+	async function load() {
+		if (data !== null) {
+			for (let host in data.hosts) {
+				let hostData = data.hosts[host].requests[0];
+				let lat = hostData.geo.coordinates.latitude + (Math.random() * (.01 - .02) + .02)
+				let long = hostData.geo.coordinates.longitude + (Math.random() * (.01 - .02) + .02)
+				var marker = L.marker([lat, long])
+				marker.bindTooltip(`<b>${host} (${data.hosts[host].requests.length})</b> <br>[${hostData.ip}]`)
+				marker.bindPopup(`<b>${host}</b>`);
+				marker.addTo(map);
+			}
+		}
+	}
 
 	onMount(() => {
 		map = L.map("map",{}).setView([data.location.coordinates.latitude, data.location.coordinates.longitude], 8);
@@ -35,6 +32,8 @@
 			radius: 5000})
 		marker.bindTooltip("<b>Your Location</b><br>" + data.location.city + ", " + data.location.country)
 		marker.addTo(map);
+
+		load();
 	})
 </script>
 
@@ -50,7 +49,4 @@
 	<div style="width: 100%; height: 100%">
 		<div id="map" style="height: 100%; box-shadow: rgb(183, 179, 179) 1px 1px 7px;"></div>
 	</div>
-	<script>
-		
-	</script>
 </div>

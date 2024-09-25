@@ -5,15 +5,13 @@
     export let data;
 </script>
 
+<Map data={data}/>
+<br>
 <div class="stats">
-    <div class="stats">
-        <p class="stat"><i class="fa fa-mail-forward" aria-hidden="true"></i> {data.count} Requests</p>
-        <p class="stat"><i class="fa fa-wifi" aria-hidden="true"></i> {Object.keys(data.hosts).length} Hosts </p>
-    </div>
-    <Map data={data}/>
-    <Chart title={"my chart"} labels={["a", "b", "c"]} data={[100, 300, 50]}/>
-      
+    <Chart title={"Resources"} labels={Object.keys(data.stats.resources)} data={Object.values(data.stats.resources)}/>
+    <Chart title={"Success Rate"} labels={Object.keys(data.stats.statusCodes)} data={Object.values(data.stats.statusCodes)}/> 
 </div>
+
 
 <style>
 .stats {

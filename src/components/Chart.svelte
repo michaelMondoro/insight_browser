@@ -1,47 +1,42 @@
 <script>
     import { onMount } from "svelte";
+    import Chart from 'chart.js/auto';
 
     export let data;
     export let labels;
     export let title;
-
     let chartTag;
-
-    import Chart from 'chart.js/auto';
-    import { getRelativePosition } from 'chart.js/helpers';
 
     onMount(() => {
         const chart = new Chart(chartTag, {
             type: 'pie',
+            title: title,
             data: {
                 labels: labels,
                 datasets: [{
-                    label: title,
                     data: data,
                     backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
+                    'rgb(255, 205, 86)',
+                    'rgb(255, 205, 155)',
+                    'rgb(255, 99, 44)',
+                    'rgb(189, 162, 235)',
+                    'rgb(214, 205, 86)',
+                    'rgb(255, 49, 65)'
                     ],
                     hoverOffset: 4
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                onClick: (e) => {
-                    const canvasPosition = getRelativePosition(e, chart);
-
-                    // Substitute the appropriate scale IDs
-                    const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
-                    const dataY = chart.scales.y.getValueForPixel(canvasPosition.y);
-                }
+                maintainAspectRatio: false
             }
         });
     })
 </script>
 
-<div style="display: relative; width: 100%;">
+<div style="display: relative; width: 100%; height: auto;">
     <canvas bind:this={chartTag} id="myChart"></canvas>
 </div>
 

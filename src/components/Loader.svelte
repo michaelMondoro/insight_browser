@@ -9,7 +9,7 @@
 .loader {
     width: 48px;
     height: 48px;
-    border: 5px solid #4a76e8;
+    border: 3px solid #9a9b9c;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

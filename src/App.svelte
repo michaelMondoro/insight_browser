@@ -2,35 +2,40 @@
     import SearchWindow from "./SearchWindow.svelte";
     import NavBar from "./components/NavBar.svelte";
     import Dashboard from "./Dashboard.svelte"
-    import { onDestroy, onMount } from "svelte";
-    
+    import { onMount } from "svelte";
+
     $: screen = "main";
     let searchQuery;
 
     onMount(() => {
-        // const val = localStorage.getItem('screen');
-        // const query = localStorage.getItem('searchQuery');
-        // console.log(`${val} -- ${query}`); 
-        // if (val) screen = val;
-        // if (query) searchQuery = searchQuery;
-    })
+        const currentScreen = sessionStorage.getItem('currentScreen');
+        if (currentScreen) {
+            screen = currentScreen;
+        } else {
+            screen = 'main';
+        }
+    });
 
-
+    function changeScreen(newScreen) {
+        screen = newScreen;
+        sessionStorage.setItem('currentScreen', screen);
+    }
 </script>
 
 <!-- Main Screen -->
 {#if screen === "main"}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();screen = "search";}} class="search_form center_align" onsubmit="" id="search_form">
+    <form on:submit|preventDefault={() => {window.api.startSession();changeScreen("search")}} class="search_form center_align" onsubmit="" id="search_form">
         <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
 <!-- Search Result Screen -->
 {:else if screen === "search"}
 <div style="height: 100%; width: 100%; display: flex; flex-direction: column">
-    <NavBar on:update={() => { window.api.stopSession();screen = "dashboard"}}/>
+    <NavBar on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
     <SearchWindow query={searchQuery}/>
 </div>
+<!-- Dashboard -->
 {:else if screen === "dashboard"}
     <Dashboard />
 {/if}

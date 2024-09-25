@@ -67,12 +67,14 @@ button {
 
 .sidebar {
     height: 100%;
-    width: 50px;
+    min-width: 4em;
+    max-width: 6em;
 }
 
 .menu_item {
     margin: .5em;
-    padding: .5em;
+    /* padding: .5em; */
+    min-height: 2em;
     font-size: 1em;
     color: #9a9b9c;
     text-align: center;
