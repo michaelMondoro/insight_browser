@@ -23,6 +23,7 @@
     "svelte": "^4.2.19"
   },
   "dependencies": {
+    "chart.js": "^4.4.4",
     "jgeoip": "^0.3.5",
     "leaflet": "^1.9.4",
     "sirv-cli": "^2.0.0"
