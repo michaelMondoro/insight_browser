@@ -28,16 +28,14 @@ function monitor() {
 app.on("ready", () => {
   mainWindow = createWindow();
   mainWindow.loadFile(path.join(__dirname, "public/index.html"));
-
-  console.log('removing localstorage');
-  mainWindow.webContents.executeJavaScript('localStorage.clear();');
   
   monitor(); 
   
   // recieve calls from front-end
   ipcMain.on("startSession", () => userSession.startSession()); 
   ipcMain.on("stopSession", () => userSession.endSession());
- 
+  ipcMain.on("visitSite", (event, site) => userSession.addSite(site));
+
   // send data to front-end
   ipcMain.handle("loadSession", () => {return userSession})
   // mainWindow.webContents.openDevTools();

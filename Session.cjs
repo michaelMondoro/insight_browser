@@ -6,6 +6,7 @@ class Session {
       this.location = null;
       this.active = false;
       this.hosts = {};
+      this.sitesVisited = [];
       this.count = 0;
       this.init();
     }
@@ -34,6 +35,10 @@ class Session {
       console.log("Session ended for IP:", this.userIP);
     }
     
+    addSite(site) {
+      this.sitesVisited.push(site);
+    }
+
     addRequest(request) {
       var hostname = request.hostname;
       if (this.hosts[hostname]) {
