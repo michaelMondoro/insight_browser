@@ -62,6 +62,7 @@
 }
 input {
     all: unset;
+    font-size: 1.2em;
 }
 
 .search {

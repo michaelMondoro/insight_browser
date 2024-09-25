@@ -1,6 +1,7 @@
 <script>
     import Map from "./Map.svelte";
-
+    import Chart from "./Chart.svelte";
+    
     export let data;
 </script>
 
@@ -10,6 +11,8 @@
         <p class="stat"><i class="fa fa-wifi" aria-hidden="true"></i> {Object.keys(data.hosts).length} Hosts </p>
     </div>
     <Map data={data}/>
+    <Chart title={"my chart"} labels={["a", "b", "c"]} data={[100, 300, 50]}/>
+      
 </div>
 
 <style>
