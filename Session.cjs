@@ -7,7 +7,12 @@ class Session {
       this.active = false;
       this.hosts = {};
       this.sitesVisited = [];
-      this.count = 0;
+      this.stats = {
+        totalRequests: 0,
+        totalServers: 0,
+        statusCodes: {},
+        resources: {}
+      };
       this.init();
     }
     async init() {
@@ -32,21 +37,39 @@ class Session {
   
     endSession() {
       this.active = false;
-      console.log("Session ended for IP:", this.userIP);
+      console.log(`Session ended for IP: ${this.userIP}`);
     }
     
     addSite(site) {
       this.sitesVisited.push(site);
     }
 
+    updateStatusCode(request) {
+      if (this.stats.statusCodes.hasOwnProperty(request.statusCode)) {
+        this.stats.statusCodes[request.statusCode] += 1;
+      } else {
+        this.stats.statusCodes[request.statusCode] = 1; 
+      }
+    }
+
+    updateResources(request) {
+      if (this.stats.resources.hasOwnProperty(request.resourceType)) {
+        this.stats.resources[request.resourceType] += 1;
+      } else {
+        this.stats.resources[request.resourceType] = 1; 
+      }
+    }
+
     addRequest(request) {
       var hostname = request.hostname;
       if (this.hosts[hostname]) {
-        this.hosts[hostname].push(request);
+        this.hosts[hostname].requests.push(request);
       } else {
-        this.hosts[hostname] = [request];
-      }
-      this.count += 1;
+        this.hosts[hostname] = { requests: [request] };
+      }      
+      this.updateResources(request);
+      this.updateStatusCode(request);
+      this.stats.totalRequests += 1;
     }
     
     getSessionData() {
