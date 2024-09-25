@@ -19,6 +19,7 @@
         {#await window.api.loadSession()}
             <Loader /> 
         {:then data} 
+        {console.log(data)}
         <Header data={data}/>
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>
@@ -45,22 +46,21 @@ button {
 
 .dashboard {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     flex-direction: column;
+    width: 100%;
     padding: 1em;
+    padding-left: 6em;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
-    height: 100%;
+    display: flex;
 }
 
 .sidebar {
-    height: 100%;
-    min-width: 4em;
-    max-width: 6em;
+    width: 4em;
+    position: fixed;
+    top: 0;
 }
 
 .menu_item {

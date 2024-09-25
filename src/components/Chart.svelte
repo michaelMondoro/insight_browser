@@ -29,17 +29,21 @@
                 }]
             },
             options: {
+                plugins: {legend: {display: false}},
                 responsive: true,
                 maintainAspectRatio: false
             }
         });
     })
 </script>
-
-<div style="display: relative; width: 100%; height: auto;">
-    <canvas bind:this={chartTag} id="myChart"></canvas>
+<div class="container">
+    <div style="display: relative; width: 100%; height: auto;">
+        <canvas bind:this={chartTag} id="myChart"></canvas>
+    </div>
+    <h3>{title}</h3>
 </div>
-
 <style>
-
+.container {
+    text-align: center;
+}
 </style>
