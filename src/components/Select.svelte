@@ -11,7 +11,7 @@
     {#if showOptions}
     <div class="options">
         {#each data.sitesVisited as site}
-            <button on:click={(e) => {selectedSite = e.currentTarget.dataset.value; showOptions = !showOptions}} class="site" data-value="{new URL(site).hostname}"><p>{ new URL(site).hostname }</p></button>    
+            <button on:click={(e) => {selectedSite = e.currentTarget.dataset.value; showOptions = !showOptions}} class="site" data-value="{site}"><p>{ site }</p></button>    
         {/each}
     </div>    
     {/if}

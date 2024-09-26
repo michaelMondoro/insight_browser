@@ -12,14 +12,13 @@
     onMount(async () => {
         data = await window.api.loadSession();
         console.log(data);
-        console.log(navigator.userAgent);
     });
 </script>
 
 <div class="container">    
     <div class="sidebar">
         <button class:highlighted={selectedPage === "Summary"} on:click={() => selectedPage = "Summary"} title="summary" class="menu_item"><i class="fa fa-desktop" aria-hidden="true"></i></button>
-        <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} title="hosts" class="menu_item"><i class="fa fa-server" aria-hidden="true"></i></button>
+        <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} title="hosts" class="menu_item"><i class="fa fa-wifi" aria-hidden="true"></i></button>
         <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} title="requests" class="menu_item"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
     </div>
     <div in:fade={{ duration: 1000 }} class="dashboard">
@@ -28,7 +27,7 @@
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>
             {:else if selectedPage === "Hosts"}
-                <h3>Hosts</h3>
+                <h3>Sites Visited</h3>
                 <Select data={data}/>
             {:else if selectedPage === "Requests"}
                 <h3>Requests</h3>
