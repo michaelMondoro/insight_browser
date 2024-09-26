@@ -1,9 +1,19 @@
 <script>
     import { fade } from "svelte/transition";
+    import { createEventDispatcher } from 'svelte';
+    
+    const selectSiteDispatcher = createEventDispatcher();
+
     export let data;
 
     let showOptions = false;
     let selectedSite = "select";
+
+    function selectSite(e) {
+        selectedSite = e.currentTarget.dataset.value; 
+        showOptions = !showOptions;
+        selectSiteDispatcher('select', selectedSite);
+    }
 </script>
 
 <div in:fade={{ duration: 800 }} class="select">
@@ -11,7 +21,7 @@
     {#if showOptions}
     <div class="options">
         {#each Object.keys(data.sitesVisited) as site}
-            <button on:click={(e) => {selectedSite = e.currentTarget.dataset.value; showOptions = !showOptions}} class="site" data-value="{site}"><p>{site}</p></button>    
+            <button on:click={selectSite} class="site" data-value="{site}"><p>{site}</p></button>    
         {/each}
     </div>    
     {/if}

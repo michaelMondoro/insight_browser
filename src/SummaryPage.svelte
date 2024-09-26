@@ -24,7 +24,7 @@
             <span class="content">{Object.keys(data.hosts).length}</span>
         </p>
     </div>
-    <Map data={data}/>
+    <Map type="full" data={data}/>
     <br>
     <div class="stats2">
         <Chart title={"Resource Types"} labels={Object.keys(data.stats.resources)} data={Object.values(data.stats.resources)}/>

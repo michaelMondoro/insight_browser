@@ -92,9 +92,9 @@ class Session {
         this.sitesVisited[requestOrigin].requests.push(request);
       } else if (this.sitesVisited[referrerOrigin]) {
         if (this.sitesVisited[referrerOrigin].externalRequests[requestOrigin]) {
-          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin].push(request);
+          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin].requests.push(request);
         } else {
-          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin] = [request]; 
+          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin] = {requests:[request]}
         }
       }
 

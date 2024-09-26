@@ -3,23 +3,44 @@
     import { onMount } from 'svelte';
 	
 	export let data;
+	export let type;
+	export let site = undefined;
+
 	let map;
+	let mapData;
 
 	async function load() {
-		if (data !== null) {
-			for (let host in data.hosts) {
-				let hostData = data.hosts[host].requests[0];
+		if (type === "full") {
+			mapData = data.hosts;
+		} else if (type === "site") {
+			mapData = data.sitesVisited[site].externalRequests;
+		}
+		
+		if (data !== null && map) {
+			console.log(mapData);
+			for (let host in mapData) {
+				let hostData = mapData[host].requests[0];
 				let lat = hostData.geo.coordinates.latitude + (Math.random() * (.01 - .02) + .02)
 				let long = hostData.geo.coordinates.longitude + (Math.random() * (.01 - .02) + .02)
 				var marker = L.marker([lat, long])
-				marker.bindPopup(`<b>${host} (${data.hosts[host].requests.length})</b> <br>[${hostData.ip}]`)
+				marker.bindPopup(`<b>${host} (${mapData[host].requests.length})</b> <br>[${hostData.ip}]`)
 				marker.bindTooltip(`<b>${host}</b>`);
+				marker.addTo(map);
+			}
+
+			if (site) {
+				var siteGeo = data.sitesVisited[site].requests[0].geo;
+				var marker = L.circle([siteGeo.coordinates.latitude, siteGeo.coordinates.longitude],{
+					color:'green', 
+					fillColor:"green", 
+					radius: 5000})
+				marker.bindTooltip(`<b>${site}</b><br>` + siteGeo.city + ", " + siteGeo.country)
 				marker.addTo(map);
 			}
 		}
 	}
 
-	onMount(() => {
+	function createMap() {
 		map = L.map("map",{}).setView([data.location.coordinates.latitude, data.location.coordinates.longitude], 8);
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 30,
@@ -32,17 +53,17 @@
 			radius: 5000})
 		marker.bindTooltip("<b>Your Location</b><br>" + data.location.city + ", " + data.location.country)
 		marker.addTo(map);
+	}
 
+	onMount( () => {
+		createMap();
 		load();
 	})
+
 </script>
 
 <svelte:head>
-    <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </svelte:head>
 
 <div style="width: 100%; height:20em; display:flex; justify-content:center">

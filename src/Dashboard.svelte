@@ -2,9 +2,11 @@
     import SummaryPage from "./SummaryPage.svelte";
     import Header from "./components/Header.svelte";
     import Loader from "./components/Loader.svelte";
-    import Select from "./components/Select.svelte";
+    import SitesPage from "./SitesPage.svelte";
+
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
+    
 
     let selectedPage = "Summary";
     let data;
@@ -27,8 +29,7 @@
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>
             {:else if selectedPage === "Hosts"}
-                <h3>Sites Visited</h3>
-                <Select data={data}/>
+                <SitesPage data={data} />
             {:else if selectedPage === "Requests"}
                 <h3>Requests</h3>
             {/if}
