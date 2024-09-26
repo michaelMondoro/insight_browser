@@ -1,10 +1,8 @@
 <script>
-    import { parse } from "svelte/compiler";
     import { fade } from "svelte/transition";
     export let data;
 
     function parseTime(time) {
-        console.log(time);
         const h = Math.floor(time / 3600);
         const m = Math.floor(time / 60);
         const sec = time % 60;
@@ -52,7 +50,7 @@ h3 {
 
 h4 {
     margin: 0em 0em;
-    padding: 0em .5em;
+    padding: .2em .5em;
 }
 
 .header {
