@@ -45,8 +45,8 @@
     crossorigin="" />
 </svelte:head>
 
-<div style="width: 100%; min-height: 20em; display:flex; justify-content:center">
-	<div style="width: 100%; height: 100%">
+<div style="width: 100%; height:20em; display:flex; justify-content:center">
+	<div style="width: 90%; height: 100%">
 		<div id="map" style="height: 100%; box-shadow: rgb(183, 179, 179) 1px 1px 7px;"></div>
 	</div>
 </div>

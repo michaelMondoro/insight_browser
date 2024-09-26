@@ -1,9 +1,11 @@
 <script>
+    import { fade } from "svelte/transition";
     export let data;
 </script>
 
-<div class="header">
+<div in:fade={{ duration: 800 }} class="header">
     <h3>Your Info</h3>
+    <br><br>
     <h4 class="" title="your ip">{data.userIP} </h4>
     <h4 class="" title="your location">{data.location.city + ", " + data.location.country}</h4>   
 </div>
@@ -11,11 +13,11 @@
 <style>
 h3 {
   position: relative;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: inline;
 }
 
-h3::before {
+/* h3::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -25,17 +27,17 @@ h3::before {
   background-color: #cecfcf;
   transform-origin: bottom left;
   transform: scaleX(0);
-  /* transition: transform 0.5s ease; */
+  transition: transform 0.5s ease; 
   animation: slideUnderline .5s forwards;
-}
+} */
 
-@keyframes slideUnderline {
+/* @keyframes slideUnderline {
     from {transform: scaleX(0);}
     to {transform: scaleX(1);}
-}
+} */
 
 h4 {
-    margin: 1em 0em;
+    margin: 0em 0em;
 }
 
 .header {

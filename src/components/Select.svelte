@@ -1,11 +1,12 @@
 <script>
+    import { fade } from "svelte/transition";
     export let data;
 
     let showOptions = false;
     let selectedSite = "select";
 </script>
 
-<div class="select">
+<div in:fade={{ duration: 800 }} class="select">
     <button on:click={() => showOptions = !showOptions} style="border-bottom: solid #363636 1px;"><input readonly bind:value={selectedSite}/></button>
     {#if showOptions}
     <div class="options">

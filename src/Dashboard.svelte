@@ -3,6 +3,7 @@
     import Header from "./components/Header.svelte";
     import Loader from "./components/Loader.svelte";
     import Select from "./components/Select.svelte";
+    import { fade } from "svelte/transition";
 
     let selectedPage = "Summary";
 
@@ -14,7 +15,7 @@
         <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} title="hosts" class="menu_item"><i class="fa fa-server" aria-hidden="true"></i></button>
         <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} title="requests" class="menu_item"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
     </div>
-    <div class="dashboard">
+    <div in:fade={{ duration: 1000 }} class="dashboard">
         {#await window.api.loadSession()}
             <Loader /> 
         {:then data} 
@@ -53,6 +54,7 @@ button {
 
 .container {
     display: flex;
+    width: 100%;
 }
 
 .sidebar {
@@ -62,7 +64,7 @@ button {
 }
 
 .menu_item {
-    margin: .5em;
+    margin: .5em 0em;
     /* padding: .5em; */
     min-height: 2em;
     font-size: 1em;

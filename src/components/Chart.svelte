@@ -6,9 +6,10 @@
     export let labels;
     export let title;
     let chartTag;
+    let chart;
 
     onMount(() => {
-        const chart = new Chart(chartTag, {
+        chart = new Chart(chartTag, {
             type: 'pie',
             title: title,
             data: {
@@ -35,15 +36,22 @@
             }
         });
     })
+    
+    window.addEventListener("resize", () => {chart.render()})
 </script>
 <div class="container">
     <h3>{title}</h3>
-    <div style="display: relative; width: 100%; height: auto;">
+    <div style="display: relative; width: 25vw;">
         <canvas bind:this={chartTag} id="myChart"></canvas>
     </div>
 </div>
 <style>
 .container {
     text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
 </style>
