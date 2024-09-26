@@ -66,7 +66,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </svelte:head>
 
-<div style="width: 100%; height:20em; display:flex; justify-content:center">
+<div style="width: 100%; height:20em; display:flex; justify-content:center;">
 	<div style="width: 90%; height: 100%">
 		<div id="map" style="height: 100%; box-shadow: rgb(183, 179, 179) 1px 1px 7px;"></div>
 	</div>

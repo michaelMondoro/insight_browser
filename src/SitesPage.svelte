@@ -3,6 +3,8 @@
     import Map from "./components/Map.svelte"
 
     export let data;
+
+    let dropdown = false
     let selectedSite;
     
     function selectSite(data) {
@@ -11,9 +13,9 @@
 </script>
 
 <h3>Sites Visited</h3>
-<Select on:select={selectSite} data={data}/>
-{#each Object.keys(data.sitesVisited ) as site}
-    {#if selectedSite == site}
+<Select on:click={() => dropdown = !dropdown} on:select={selectSite} data={data}/>
+{#each Object.keys(data.sitesVisited) as site}
+    {#if selectedSite == site && !dropdown}
         <h3>{site}</h3>
         <Map type="site" data={data} site={selectedSite}/>
     {/if}

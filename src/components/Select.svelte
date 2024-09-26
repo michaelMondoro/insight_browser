@@ -3,6 +3,7 @@
     import { createEventDispatcher } from 'svelte';
     
     const selectSiteDispatcher = createEventDispatcher();
+    const clickDispatcher = createEventDispatcher();
 
     export let data;
 
@@ -16,7 +17,9 @@
     }
 </script>
 
-<div in:fade={{ duration: 800 }} class="select">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div in:fade={{ duration: 800 }} on:click={()=>clickDispatcher("click")} class="select">
     <button on:click={() => showOptions = !showOptions} style="border-bottom: solid #363636 1px;"><input readonly bind:value={selectedSite}/></button>
     {#if showOptions}
     <div class="options">
@@ -37,6 +40,8 @@ button {
     border-radius: 0px;
     cursor: pointer;
     width: 50%;
+    z-index: 1;
+    position: relative;
 }
 .site:hover {
     color: #9a9b9c;
@@ -44,6 +49,10 @@ button {
     transition: all .3s;
 }
 .options {
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    background-color: white;
 }
 
 input {
