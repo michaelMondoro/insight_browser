@@ -4,18 +4,14 @@
 
     let showOptions = false;
     let selectedSite = "select";
-    function baseURL(site) {
-        var url = new URL(site);
-        return `${url.protocol}//${url.hostname}${url.pathname}`
-    }
 </script>
 
 <div in:fade={{ duration: 800 }} class="select">
     <button on:click={() => showOptions = !showOptions} style="border-bottom: solid #363636 1px;"><input readonly bind:value={selectedSite}/></button>
     {#if showOptions}
     <div class="options">
-        {#each data.sitesVisited as site}
-            <button on:click={(e) => {selectedSite = e.currentTarget.dataset.value; showOptions = !showOptions}} class="site" data-value="{site}"><p>{baseURL(site)}</p></button>    
+        {#each Object.keys(data.sitesVisited) as site}
+            <button on:click={(e) => {selectedSite = e.currentTarget.dataset.value; showOptions = !showOptions}} class="site" data-value="{site}"><p>{site}</p></button>    
         {/each}
     </div>    
     {/if}

@@ -17,7 +17,7 @@
         </p>
         <p class="stat">
             <span>Sites Visited</span>
-            <span class="content">{data.sitesVisited.length}</span>
+            <span class="content">{Object.keys(data.sitesVisited).length}</span>
         </p>
         <p class="stat">
             <span>Servers Hit</span>

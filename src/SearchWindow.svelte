@@ -10,7 +10,7 @@
 </script>
 
 <div class="container center_align">
-    <webview bind:this={webview} id="webpage" src={`https://duckduckgo.com/?q=${encodeURIComponent(query)}`} style="width: 100%; height: 100%"></webview>
+    <webview bind:this={webview} id="webpage" src={`https://safe.duckduckgo.com/?q=${encodeURIComponent(query)}`} style="width: 100%; height: 100%"></webview>
 </div>
 
 <style>

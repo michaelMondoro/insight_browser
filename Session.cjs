@@ -6,11 +6,10 @@ class Session {
       this.location = null;
       this.active = false;
       this.hosts = {};
-      this.sitesVisited = [];
+      this.sitesVisited = {};
       this.time = 0;
       this.stats = {
         totalRequests: 0,
-        totalServers: 0,
         statusCodes: {},
         resources: {}
       };
@@ -44,7 +43,14 @@ class Session {
     }
     
     addSite(site) {
-      this.sitesVisited.push(site);
+      let origin = new URL(site).origin;
+
+      if (!this.sitesVisited.hasOwnProperty(origin)) {
+        this.sitesVisited[origin] = {
+          requests: [],
+          externalRequests: {}
+        }
+      } 
     }
 
     updateStatusCode(request) {
@@ -64,6 +70,7 @@ class Session {
     }
 
     addRequest(request) {
+      // update session data
       var hostname = request.hostname;
       if (this.hosts[hostname]) {
         this.hosts[hostname].requests.push(request);
@@ -73,6 +80,24 @@ class Session {
       this.updateResources(request);
       this.updateStatusCode(request);
       this.stats.totalRequests += 1;
+
+      // update sites data
+      let requestOrigin = new URL(request.url).origin;
+      let referrerOrigin;
+      if (request.referrer) {
+         referrerOrigin = new URL(request.referrer).origin;
+      }
+
+      if (this.sitesVisited[requestOrigin]) {
+        this.sitesVisited[requestOrigin].requests.push(request);
+      } else if (this.sitesVisited[referrerOrigin]) {
+        if (this.sitesVisited[referrerOrigin].externalRequests[requestOrigin]) {
+          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin].push(request);
+        } else {
+          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin] = [request]; 
+        }
+      }
+
     }
     
     getSessionData() {
