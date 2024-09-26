@@ -7,6 +7,7 @@ class Session {
       this.active = false;
       this.hosts = {};
       this.sitesVisited = [];
+      this.time = 0;
       this.stats = {
         totalRequests: 0,
         totalServers: 0,
@@ -32,11 +33,13 @@ class Session {
     
     startSession() {
       this.active = true;
+      this.time = Date.now();
       console.log(`Session started for IP: ${this.userIP}`);      
     }
   
     endSession() {
       this.active = false;
+      this.time = (Date.now()-this.time) / 1000
       console.log(`Session ended for IP: ${this.userIP}`);
     }
     

@@ -1,14 +1,24 @@
 <script>
+    import { parse } from "svelte/compiler";
     import { fade } from "svelte/transition";
     export let data;
+
+    function parseTime(time) {
+        console.log(time);
+        const h = Math.floor(time / 3600);
+        const m = Math.floor(time / 60);
+        const sec = time % 60;
+        return (h > 0) ? `${h}h ${m}m ${sec}s` : `${m}m ${sec}s` 
+    }
 </script>
 
 <div in:fade={{ duration: 800 }} class="header">
     <h3>Your Info</h3>
     <br><br>
     <div class="grid">
-        <h4 class="name">ip address</h4><h4 class="" title="your ip">{data.userIP} </h4>
-        <h4 class="name">location</h4><h4 class="" title="your location">{data.location.city + ", " + data.location.country}</h4>   
+        <h4 class="name">session time</h4><h4>{parseTime(data.time)}</h4>
+        <h4 class="name">ip address</h4><h4>{data.userIP} </h4>
+        <h4 class="name">location</h4><h4>{data.location.city + ", " + data.location.country}</h4>   
         <h4 class="name">operating system</h4><h4>{window.navigator.userAgentData.platform}</h4>
         <h4 class="name">mobile?</h4><h4>{window.navigator.userAgentData.mobile}</h4>
     </div>

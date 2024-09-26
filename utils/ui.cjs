@@ -4,8 +4,7 @@ const path = require("path");
 module.exports = {
     createWindow: () => {
         return new BrowserWindow({
-          width: 800,
-          height: 600,
+          fullscreen: true,
           webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,

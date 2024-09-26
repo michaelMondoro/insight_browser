@@ -12,8 +12,8 @@
 				let lat = hostData.geo.coordinates.latitude + (Math.random() * (.01 - .02) + .02)
 				let long = hostData.geo.coordinates.longitude + (Math.random() * (.01 - .02) + .02)
 				var marker = L.marker([lat, long])
-				marker.bindTooltip(`<b>${host} (${data.hosts[host].requests.length})</b> <br>[${hostData.ip}]`)
-				marker.bindPopup(`<b>${host}</b>`);
+				marker.bindPopup(`<b>${host} (${data.hosts[host].requests.length})</b> <br>[${hostData.ip}]`)
+				marker.bindTooltip(`<b>${host}</b>`);
 				marker.addTo(map);
 			}
 		}
