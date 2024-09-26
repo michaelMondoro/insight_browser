@@ -12,7 +12,7 @@
 
     <div class="stats3">
         <p class="stat">
-            <span>Requests</span>
+            <span>HTTP Requests</span>
             <span class="content">{data.stats.totalRequests}</span>
         </p>
         <p class="stat">

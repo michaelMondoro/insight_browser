@@ -1,10 +1,10 @@
 <script>
 	import L from 'leaflet';
     import { onMount } from 'svelte';
-
+	
 	export let data;
 	let map;
-	
+
 	async function load() {
 		if (data !== null) {
 			for (let host in data.hosts) {
