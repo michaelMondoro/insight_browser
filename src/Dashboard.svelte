@@ -4,9 +4,16 @@
     import Loader from "./components/Loader.svelte";
     import Select from "./components/Select.svelte";
     import { fade } from "svelte/transition";
+    import { onMount } from "svelte";
 
     let selectedPage = "Summary";
+    let data;
 
+    onMount(async () => {
+        data = await window.api.loadSession();
+        console.log(data);
+        console.log(navigator.userAgent);
+    });
 </script>
 
 <div class="container">    
@@ -16,10 +23,8 @@
         <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} title="requests" class="menu_item"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
     </div>
     <div in:fade={{ duration: 1000 }} class="dashboard">
-        {#await window.api.loadSession()}
-            <Loader /> 
-        {:then data} 
-        <Header data={data}/>
+        {#if data}
+            <Header data={data}/>
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>
             {:else if selectedPage === "Hosts"}
@@ -28,7 +33,9 @@
             {:else if selectedPage === "Requests"}
                 <h3>Requests</h3>
             {/if}
-        {/await} 
+        {:else}
+            <Loader /> 
+        {/if}   
     </div>    
 </div>
 

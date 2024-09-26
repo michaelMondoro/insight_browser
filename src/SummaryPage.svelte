@@ -57,10 +57,17 @@
     text-align: center;
     border-radius: .3em;
     padding: .5em;
-    /* box-shadow: #363636a4 2px 2px 3px; */
+    /* box-shadow: #363636a4 0px 2px 5px; */
+}
+.stat > span:first-child {
+    transition: all .3s;
 }
 
-.stat::before {
+.stat:hover > span:first-child{
+    font-size: 1.5em;
+}
+
+/* .stat::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -75,6 +82,6 @@
 
 .stat:hover::before {
   transform: translate(-50%, 0) scaleX(.5);
-}
+} */
 
 </style>

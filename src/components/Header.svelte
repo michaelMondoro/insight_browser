@@ -6,8 +6,12 @@
 <div in:fade={{ duration: 800 }} class="header">
     <h3>Your Info</h3>
     <br><br>
-    <h4 class="" title="your ip">{data.userIP} </h4>
-    <h4 class="" title="your location">{data.location.city + ", " + data.location.country}</h4>   
+    <div class="grid">
+        <h4 class="name">ip address</h4><h4 class="" title="your ip">{data.userIP} </h4>
+        <h4 class="name">location</h4><h4 class="" title="your location">{data.location.city + ", " + data.location.country}</h4>   
+        <h4 class="name">operating system</h4><h4>{window.navigator.userAgentData.platform}</h4>
+        <h4 class="name">mobile?</h4><h4>{window.navigator.userAgentData.mobile}</h4>
+    </div>
 </div>
 
 <style>
@@ -38,6 +42,7 @@ h3 {
 
 h4 {
     margin: 0em 0em;
+    padding: 0em .5em;
 }
 
 .header {
@@ -45,5 +50,15 @@ h4 {
     text-align: left;
     /* font-family: 'Raleway', sans-serif; */
     font-family: 'Courier New', Courier, monospace;
+}
+.name {
+    border-right: solid black 1px;
+    text-align: right;
+    color: #9a9b9c;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
 }
 </style>
