@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     const endSessionDispatcher = createEventDispatcher();
+    const homeDispatcher = createEventDispatcher();
 
     let requestCount = 0;
     window.api.updateRequestCount(() => {requestCount+=1})
@@ -8,30 +9,23 @@
 <main>
     <div class="banner">
         <span>
-            <i class="icon fa fa-angle-left" onclick="goBack()"></i>
-            <i class="icon fa fa-angle-right" onclick="goForward()"></i>
+            <button unset on:click={() => homeDispatcher('home')}><i class="icon fa fa-home" ></i></button>
+            <button unset on:click={() => document.getElementById("webpage").goBack()}><i class="icon fa fa-angle-left" onclick="goBack()"></i></button>
+            <button unset on:click={() => document.getElementById("webpage").goForward()}><i class="icon fa fa-angle-right" onclick="goForward()"></i></button>
         </span>
         <span>
             <span contenteditable bind:textContent={requestCount} id="count" class="highlight" data-tooltip="requests">0</span>
             <span id="status" class="status"></span>
-            <button on:click={() => {endSessionDispatcher('update', true)}}><span>stop</span></button>
+            <button class="end" on:click={() => {endSessionDispatcher('update', true)}}><span>stop</span></button>
         </span>
     </div>
-    <script>
-        function goBack() {
-            var webview = document.getElementById("webpage");
-            webview.goBack();
-        }
-
-        function goForward() {
-            var webview = document.getElementById("webpage");
-            webview.goForward()
-        }
-    </script>
 </main>
 
 <style>
-button {
+button[unset] {
+    all:unset;
+}
+.end {
     appearance: none;
     background-color:rgba(255, 255, 255, 0);
     border: solid grey 1px;
@@ -39,16 +33,16 @@ button {
     border-radius: .2em;
     transition: all .5s;
 }
-button:hover {
+.end:hover {
     cursor: pointer;
     border-radius: 1em;
     color:white;
     background-color: #363636;
 }
-button:hover > span {
+.end:hover > span {
     display: none;
 }
-button:hover::before {
+.end:hover::before {
     content: 'end session';
 }
 #count {

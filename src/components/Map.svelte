@@ -17,7 +17,6 @@
 		}
 		
 		if (data !== null && map) {
-			console.log(mapData);
 			for (let host in mapData) {
 				let hostData = mapData[host].requests[0];
 				let lat = hostData.geo.coordinates.latitude + (Math.random() * (.01 - .02) + .02)

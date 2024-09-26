@@ -5,11 +5,12 @@
     import { onMount } from "svelte";
 
     $: screen = "main";
-    let searchQuery;
+    let searchQuery = "";
 
     onMount(() => {
         const currentScreen = sessionStorage.getItem('currentScreen');
         screen = currentScreen ? currentScreen : 'main';
+        searchQuery = "";
     });
 
     function changeScreen(newScreen) {
@@ -21,14 +22,14 @@
 <!-- Main Screen -->
 {#if screen === "main"}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();changeScreen("search")}} class="search_form center_align" onsubmit="" id="search_form">
+    <form on:submit|preventDefault={() => {window.api.startSession();changeScreen("search");}} class="search_form center_align" onsubmit="" id="search_form">
         <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
 <!-- Search Result Screen -->
 {:else if screen === "search"}
 <div style="height: 100%; width: 100%; display: flex; flex-direction: column">
-    <NavBar on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
+    <NavBar on:home={() => {screen = "main"; searchQuery = ""}} on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
     <SearchWindow query={searchQuery}/>
 </div>
 <!-- Dashboard -->
