@@ -43,10 +43,10 @@ class Session {
     }
     
     addSite(site) {
-      let origin = new URL(site).origin;
+      let hostname = new URL(site).hostname;
 
-      if (!this.sitesVisited.hasOwnProperty(origin)) {
-        this.sitesVisited[origin] = {
+      if (!this.sitesVisited.hasOwnProperty(hostname)) {
+        this.sitesVisited[hostname] = {
           requests: [],
           externalRequests: {}
         }
@@ -69,35 +69,50 @@ class Session {
       }
     }
 
-    addRequest(request) {
+    addRequest(data) {
       // update session data
-      var hostname = request.hostname;
+      var hostname = data.host.hostname;
+      var request = data.request;
+      var host = data.host;
+
       if (this.hosts[hostname]) {
         this.hosts[hostname].requests.push(request);
       } else {
-        this.hosts[hostname] = { requests: [request] };
+        this.hosts[hostname] = { 
+          geo: host.geo,
+          asn: host.asn,
+          ip: host.ip,
+          requests: [request] 
+        };
       }      
       this.updateResources(request);
       this.updateStatusCode(request);
       this.stats.totalRequests += 1;
 
       // update sites data
-      let requestOrigin = new URL(request.url).origin;
-      let referrerOrigin;
+      let requestHostname = new URL(request.url).hostname;
+      let referrerHostname;
       if (request.referrer) {
-         referrerOrigin = new URL(request.referrer).origin;
+         referrerHostname = new URL(request.referrer).hostname;
       }
 
-      if (this.sitesVisited[requestOrigin]) {
-        this.sitesVisited[requestOrigin].requests.push(request);
-      } else if (this.sitesVisited[referrerOrigin]) {
-        if (this.sitesVisited[referrerOrigin].externalRequests[requestOrigin]) {
-          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin].requests.push(request);
+      if (this.sitesVisited[requestHostname]) {
+        this.sitesVisited[requestHostname].requests.push(request);
+      
+      } else if (this.sitesVisited[referrerHostname]) {
+
+        if (this.sitesVisited[referrerHostname].externalRequests[requestHostname]) {
+          this.sitesVisited[referrerHostname].externalRequests[requestHostname].requests.push(request);
         } else {
-          this.sitesVisited[referrerOrigin].externalRequests[requestOrigin] = {requests:[request]}
+          this.sitesVisited[referrerHostname].externalRequests[requestHostname] = {
+            geo: host.geo,
+            asn: host.asn,
+            ip: host.ip,
+            requests: [request] 
+          }
         }
-      }
 
+      }
     }
     
     getSessionData() {

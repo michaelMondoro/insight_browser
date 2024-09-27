@@ -11,7 +11,7 @@
 </script>
 
 <div in:fade={{ duration: 800 }} class="header">
-    <h3>Your Info</h3>
+    <!-- <h3>Your Info</h3> -->
     <br><br>
     <div class="grid">
         <h4 class="name">session time</h4><h4>{parseTime(data.time)}</h4>

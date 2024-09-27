@@ -24,12 +24,12 @@
             <span class="content">{Object.keys(data.hosts).length}</span>
         </p>
     </div>
-    <Map type="full" data={data}/>
-    <br>
     <div class="stats2">
         <Chart title={"Resource Types"} labels={Object.keys(data.stats.resources)} data={Object.values(data.stats.resources)}/>
         <Chart title={"Status Codes"} labels={Object.keys(data.stats.statusCodes)} data={Object.values(data.stats.statusCodes)}/> 
     </div>
+    <br>
+    <Map type="full" data={data}/>    
 
 </div>
 <style>

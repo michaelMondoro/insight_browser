@@ -6,18 +6,20 @@ module.exports = {
             geoData = geo.getIP(details.ip);
             asnData = geo.getASN(details.ip);
             hostname = new URL(details.url).hostname;
-            data = {
+            hostData = {
                 hostname: hostname,
-                url: details.url,
-                method: details.method,
-                resourceType: details.resourceType,
-                referrer: details.referrer, 
                 ip: details.ip,
                 asn: asnData,
-                statusCode: details.statusCode,
                 geo : geoData
             }
-            return data;
+            requestData = {
+                url: details.url,
+                method: details.method,
+                statusCode: details.statusCode,
+                resourceType: details.resourceType,
+                referrer: details.referrer
+            }
+            return {host: hostData, request: requestData};
         }
     }
 }

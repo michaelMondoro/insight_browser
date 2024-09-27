@@ -53,6 +53,7 @@ button {
     top: 100%;
     z-index: 100;
     background-color: white;
+    text-align: left;
 }
 
 input {
