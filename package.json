@@ -4,14 +4,20 @@
   "private": true,
   "type": "module",
   "main": "index.cjs",
-  "files": ["./data"],
+  "files": [
+    "./data"
+  ],
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "electron .",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder --publish always",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-terser": "^0.4.0",
