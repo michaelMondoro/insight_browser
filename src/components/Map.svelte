@@ -44,7 +44,7 @@
 				for (let i in latlngs) {
 					const latlng = [latlngs[i][1], latlngs[i][2]]
 					var lineCoords = [[siteGeo.coordinates.latitude, siteGeo.coordinates.longitude],latlng];
-					var polyline = L.polyline(lineCoords, {color: 'blue', weight: 1})
+					var polyline = L.polyline(lineCoords, {color: 'blue', weight: 2})
 					polyline.bindTooltip(`${site} -> ${latlngs[i][0]}`, {sticky: true})
 					polyline.addTo(map);
 				}

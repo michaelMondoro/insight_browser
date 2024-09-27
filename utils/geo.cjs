@@ -1,6 +1,9 @@
 const jGeoIP = require('jgeoip');
-var geoip = new jGeoIP('data/dbip-city.mmdb');
-var asnip = new jGeoIP('data/dbip-asn.mmdb');
+const { app } = require('electron');
+const path = require('path');
+
+var geoip = new jGeoIP(path.join(app.getAppPath(), 'data', 'dbip-city.mmdb'));
+var asnip = new jGeoIP(path.join(app.getAppPath(), 'data', 'dbip-asn.mmdb'));
 
 module.exports = {
     getIP: function(ip) {

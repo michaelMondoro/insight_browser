@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "main": "index.cjs",
+  "files": ["./data"],
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

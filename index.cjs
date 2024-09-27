@@ -1,11 +1,11 @@
 const { app, session, ipcMain } = require("electron");
 const path = require("path");
-
 const { Session } = require("./Session.cjs");
 const { processRequest } = require("./utils/http.cjs");
 const { createWindow, loadPage } = require("./utils/ui.cjs")
 
-app.commandLine.appendSwitch('disable-gpu'); // WHY??
+
+// app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
 let mainWindow;
 let userSession = new Session();
