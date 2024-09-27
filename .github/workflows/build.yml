@@ -27,6 +27,6 @@ jobs:
 
       - name: Build / Publish
         env:
-          GH_TOKEN: ${{ secrets.insight }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run dist
         
