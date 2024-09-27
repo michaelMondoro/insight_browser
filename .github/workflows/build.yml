@@ -28,4 +28,4 @@ jobs:
       - name: Build / Publish
         run: npm run dist
         env:
-          GITHUB_TOKEN: ${{ secrets.insight }}
+          GH_TOKEN: ${{ secrets.insight }}
