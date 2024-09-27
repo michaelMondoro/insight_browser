@@ -1,6 +1,9 @@
 {
   "name": "insight_browser",
   "version": "1.0.0",
+  "keywords": [],
+  "author": "Michael M",
+  "license": "ISC",
   "description": "browser for viewing/monitoring your web data",
   "type": "module",
   "main": "index.cjs",
