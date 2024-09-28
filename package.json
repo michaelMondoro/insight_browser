@@ -12,7 +12,8 @@
   ],
   "build": {
     "publish": {"provider": "github", "releaseType": "release"},
-    "linux": {"target": ["AppImage"]}
+    "linux": {"target": ["AppImage"]},
+    "win": {"target":["portable"]}
   },
   "scripts": {
     "build": "rollup -c",
