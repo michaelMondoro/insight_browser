@@ -6,8 +6,9 @@
     export let data;
 </script>
 <div in:fade={{ duration: 800 }} style="width: 90%; text-align:center">
-    <div style="width: 100%; text-align:center">
-        <h3>Summary</h3>
+    <div style="width: 100%; text-align:left">
+        <h2>Overview</h2>
+        <p class="subheading">your browsing session at a glance 🕶</p>
     </div>
 
     <div class="stats3">
@@ -33,6 +34,13 @@
 
 </div>
 <style>
+h2 {
+    margin-bottom: 0;
+}
+.subheading {
+    color:rgb(115, 113, 113);
+    margin: 0;
+}
 .stats3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -66,22 +74,5 @@
 .stat:hover > span:first-child{
     font-size: 1.5em;
 }
-
-/* .stat::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #9a9b9c;
-  transform-origin: center;
-  transform: translate(-50%, 0) scaleX(0);
-  transition: transform 0.3s ease-in-out;
-}
-
-.stat:hover::before {
-  transform: translate(-50%, 0) scaleX(.5);
-} */
 
 </style>

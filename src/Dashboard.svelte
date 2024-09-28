@@ -19,19 +19,19 @@
 
 <div class="container">    
     <div class="sidebar">
-        <button class:highlighted={selectedPage === "Summary"} on:click={() => selectedPage = "Summary"} title="summary" class="menu_item"><i class="fa fa-desktop" aria-hidden="true"></i></button>
-        <button class:highlighted={selectedPage === "Hosts"} on:click={() => selectedPage = "Hosts"} title="hosts" class="menu_item"><i class="fa fa-wifi" aria-hidden="true"></i></button>
-        <button class:highlighted={selectedPage === "Requests"} on:click={() => selectedPage = "Requests"} title="requests" class="menu_item"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
+        <button class:highlighted={selectedPage === "Summary"} on:click={() => selectedPage = "Summary"} title="overview" class="menu_item"><i class="fa fa-desktop" aria-hidden="true"></i></button>
+        <button class:highlighted={selectedPage === "Explore"} on:click={() => selectedPage = "Explore"} title="explore" class="menu_item"><i class="fa fa-map-o" aria-hidden="true"></i></button>
+        <button class:highlighted={selectedPage === "Help"} on:click={() => selectedPage = "Help"} title="help" class="menu_item"><i class="fa fa-question" aria-hidden="true"></i></button>
     </div>
     <div in:fade={{ duration: 1000 }} class="dashboard">
         {#if data}
             <Header data={data}/>
             {#if selectedPage === "Summary"}
                 <SummaryPage data={data}/>
-            {:else if selectedPage === "Hosts"}
+            {:else if selectedPage === "Explore"}
                 <SitesPage data={data} />
-            {:else if selectedPage === "Requests"}
-                <h3>Requests</h3>
+            {:else if selectedPage === "Help"}
+                <h3>Help</h3>
             {/if}
         {:else}
             <Loader /> 
@@ -67,7 +67,7 @@ button {
 .sidebar {
     width: 4em;
     position: fixed;
-    top: 0;
+    top: 3em;
 }
 
 .menu_item {

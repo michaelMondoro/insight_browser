@@ -12,7 +12,6 @@
 
 <div in:fade={{ duration: 800 }} class="header">
     <!-- <h3>Your Info</h3> -->
-    <br><br>
     <div class="grid">
         <h4 class="name">session time</h4><h4>{parseTime(data.time)}</h4>
         <h4 class="name">ip address</h4><h4>{data.userIP} </h4>
@@ -22,11 +21,6 @@
 </div>
 
 <style>
-h3 {
-  position: relative;
-  font-family: 'Poppins', sans-serif;
-  display: inline;
-}
 
 /* h3::before {
   content: '';
@@ -57,6 +51,7 @@ h4 {
     text-align: left;
     /* font-family: 'Raleway', sans-serif; */
     font-family: 'Courier New', Courier, monospace;
+    padding-top: 2em;
 }
 .name {
     border-right: solid black 1px;

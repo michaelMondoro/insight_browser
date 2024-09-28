@@ -98,7 +98,4 @@
 </div>
 
 <style>
-.div-icon {
-	font-size: 3em;
-}
 </style>

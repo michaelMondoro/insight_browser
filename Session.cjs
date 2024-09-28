@@ -69,6 +69,26 @@ class Session {
       }
     }
 
+    updateHostStatusCode(hostname, request) {
+      if (this.hosts[hostname]) {
+        if (this.hosts[hostname].stats.statusCodes.hasOwnProperty(request.statusCode)) {
+          this.hosts[hostname].stats.statusCodes[request.statusCode] += 1;
+        } else {
+          this.hosts[hostname].stats.statusCodes[request.statusCode] = 1; 
+        }
+      }
+    }
+
+    updateHostResources(hostname, request) {
+      if (this.hosts[hostname]) {
+        if (this.hosts[hostname].stats.resources.hasOwnProperty(request.resourceType)) {
+          this.hosts[hostname].stats.resources[request.resourceType] += 1;
+        } else {
+          this.hosts[hostname].stats.resources[request.resourceType] = 1; 
+        }
+      } 
+    }
+
     addRequest(data) {
       // update session data
       var hostname = data.host.hostname;
@@ -82,9 +102,18 @@ class Session {
           geo: host.geo,
           asn: host.asn,
           ip: host.ip,
-          requests: [request] 
+          requests: [request],
+          stats: {
+            totalRequests: 0,
+            statusCodes: {},
+            resources: {}
+          }
         };
       }      
+      this.updateHostStatusCode(hostname, request);
+      this.updateHostResources(hostname, request);
+      this.hosts[hostname].stats.totalRequests += 1;
+      
       this.updateResources(request);
       this.updateStatusCode(request);
       this.stats.totalRequests += 1;
