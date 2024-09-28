@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('api', {
   visitSite: (site) => ipcRenderer.send('visitSite', site),
 
   updateRequestCount: (callback) => ipcRenderer.on('updateRequestCount', (_event) => callback()),
+  setTheme: () => ipcRenderer.invoke('setTheme'),
   loadSession: () => ipcRenderer.invoke("loadSession")
 })
 

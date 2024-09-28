@@ -3,11 +3,13 @@
     const endSessionDispatcher = createEventDispatcher();
     const homeDispatcher = createEventDispatcher();
 
+    export let darkMode;
+    console.log(darkMode)
     let requestCount = 0;
     window.api.updateRequestCount(() => {requestCount+=1})
 </script>
 <main>
-    <div class="banner">
+    <div class="banner {darkMode ? `dark`: ''}">
         <span>
             <button unset on:click={() => homeDispatcher('home')}><i class="icon fa fa-home" ></i></button>
             <button unset on:click={() => document.getElementById("webpage").goBack()}><i class="icon fa fa-angle-left" onclick="goBack()"></i></button>
@@ -16,15 +18,21 @@
         <span>
             <span contenteditable bind:textContent={requestCount} id="count" class="highlight" data-tooltip="requests">0</span>
             <span id="status" class="status"></span>
-            <button class="end" on:click={() => {endSessionDispatcher('update', true)}}><span>stop</span></button>
+            <button class="end {darkMode ? `dark-button`: ''}" on:click={() => {endSessionDispatcher('update', true)}}><span>stop</span></button>
         </span>
     </div>
 </main>
 
 <style>
+
 button[unset] {
     all:unset;
 }
+
+.dark-button > span {
+    color:#eeeeee;
+}
+
 .end {
     appearance: none;
     background-color:rgba(255, 255, 255, 0);
@@ -103,5 +111,10 @@ button[unset] {
     display: flex;
     justify-content: space-between;
     padding: 2em 1em 1em 1em;
+}
+
+.dark {
+    background-color: #161616;
+    color: #eeeeee;
 }
 </style>

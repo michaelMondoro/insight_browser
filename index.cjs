@@ -1,11 +1,10 @@
-const { app, session, ipcMain } = require("electron");
+const { app, session, ipcMain , nativeTheme} = require("electron");
 const path = require("path");
 const { Session } = require("./Session.cjs");
 const { processRequest } = require("./utils/http.cjs");
 const { createWindow, loadPage } = require("./utils/ui.cjs")
 
-
-// app.commandLine.appendSwitch('disable-gpu'); // WHY??
+app.commandLine.appendSwitch('disable-gpu'); // WHY??
 
 let mainWindow;
 let userSession = new Session();
@@ -37,6 +36,7 @@ app.on("ready", () => {
   ipcMain.on("visitSite", (event, site) => userSession.addSite(site));
 
   // send data to front-end
-  ipcMain.handle("loadSession", () => {return userSession})
+  ipcMain.handle("setTheme", () => {return nativeTheme.shouldUseDarkColors});
+  ipcMain.handle("loadSession", () => {return userSession});
   // mainWindow.webContents.openDevTools();
 });

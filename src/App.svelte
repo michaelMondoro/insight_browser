@@ -6,11 +6,14 @@
 
     $: screen = "main";
     let searchQuery = "";
+    let darkMode = undefined;
+    
 
     onMount(() => {
         const currentScreen = sessionStorage.getItem('currentScreen');
         screen = currentScreen ? currentScreen : 'main';
         searchQuery = "";
+        darkMode = async () => {return await window.api.setTheme()};
     });
 
     function changeScreen(newScreen) {
@@ -28,8 +31,8 @@
 </div>
 <!-- Search Result Screen -->
 {:else if screen === "search"}
-<div style="height: 100%; width: 100%; display: flex; flex-direction: column">
-    <NavBar on:home={() => {screen = "main"; searchQuery = ""}} on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
+<div class="{darkMode ? 'dark': ''}" style="height: 100%; width: 100%; display: flex; flex-direction: column">
+    <NavBar darkMode={darkMode} on:home={() => {screen = "main"; searchQuery = ""}} on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
     <SearchWindow query={searchQuery}/>
 </div>
 <!-- Dashboard -->
@@ -41,7 +44,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+.dark {
+    background-color: #161616;
+    color: #eeeeee;
+}
 .center_align {
     display: flex;
     flex-direction: column;
