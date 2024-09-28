@@ -25,8 +25,8 @@
 <!-- Main Screen -->
 {#if screen === "main"}
 <div class="container center_align">
-    <form on:submit|preventDefault={() => {window.api.startSession();changeScreen("search");}} class="search_form center_align" onsubmit="" id="search_form">
-        <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search" on:load={document.getElementById("search_input").focus()}>
+    <form class="search_form center_align" on:submit|preventDefault={() => {window.api.startSession();changeScreen("search");}}>
+        <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search . . ." on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
 <!-- Search Result Screen -->
@@ -60,13 +60,14 @@
     font-family: "Montserrat", sans-serif;
 }
 
-
 .search_form {
     width: 60%;
     height: 100%;
 }
+
 input {
     all: unset;
+    padding: .3em;
     font-size: 1.2em;
 }
 
