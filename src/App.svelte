@@ -9,11 +9,11 @@
     let darkMode = undefined;
     
 
-    onMount(() => {
+    onMount(async () => {
         const currentScreen = sessionStorage.getItem('currentScreen');
         screen = currentScreen ? currentScreen : 'main';
         searchQuery = "";
-        darkMode = async () => {return await window.api.setTheme()};
+        darkMode = await window.api.setTheme();
     });
 
     function changeScreen(newScreen) {
