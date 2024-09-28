@@ -13,9 +13,11 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div in:fade={{ duration: 800 }} on:click={()=>clickDispatcher("click")} class="select">
-    <button on:click={() => showContents = !showContents} style="border-bottom: solid #363636 1px;"><input readonly bind:value={title}/></button>
+    <button on:click={() => showContents = !showContents} style="border-bottom: solid #363636 1px;"><input readonly bind:value={title}/><i class="icon fa fa-angle-down"></i></button>
     {#if showContents}
-    <div contenteditable bind:innerHTML={content}></div>  
+    <div class="content">
+        <p contenteditable bind:innerHTML={content}></p>
+    </div>  
     {/if}
 </div>
 
@@ -23,9 +25,12 @@
 button {
     all: unset;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
+
 .select {
-    padding: 1em;
+    padding: .5em;
     border-radius: 0px;
     cursor: pointer;
     width: 100%;
@@ -33,10 +38,15 @@ button {
     position: relative;
 }
 
+.content {
+    padding: .5em;
+}
+
 input {
     border: none;
     outline: none;
     cursor: pointer;
-    width: 100%;
+    padding: 0;
+    width: 90%;
 }
 </style>

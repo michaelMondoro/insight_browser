@@ -29,7 +29,7 @@
         <input bind:value={searchQuery} class="search" type="text" id="search_input" placeholder="search . . ." on:load={document.getElementById("search_input").focus()}>
     </form>   
 </div>
-<!-- Search Result Screen -->
+<!-- Search/Browsing Screen -->
 {:else if screen === "search"}
 <div class="{darkMode ? 'dark': ''}" style="height: 100%; width: 100%; display: flex; flex-direction: column">
     <NavBar darkMode={darkMode} on:home={() => {screen = "main"; searchQuery = ""}} on:update={() => { window.api.stopSession();changeScreen("dashboard")}}/>
