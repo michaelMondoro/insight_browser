@@ -12,3 +12,10 @@ The goal of this project is to provide a tool that ANYONE can use in order to ed
 Fundamentally, **Insight Browser** is just that - a web browser! And should be used as such. At the end of each browsing session you will be shown a dashboard breaking down all of the data from your journey across the internet, including all the sites you visited, all the sites that THOSE sites communicated with and much more. 
 
 Get some insight into your digital life today.
+
+ 
+![overview](https://github.com/user-attachments/assets/1dbc0527-9961-4336-94e0-0e6b27616533)
+
+<hr>
+
+![explore](https://github.com/user-attachments/assets/2f549dfe-31d8-4565-a9c8-4422bf413bc3)
