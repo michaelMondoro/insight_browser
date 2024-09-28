@@ -24,5 +24,6 @@
     height: 100%;
     padding: 0;
     font-family: "Montserrat", sans-serif;
+    background-color: #eeeeee;
 }
 </style>

@@ -51,6 +51,7 @@ button {
 .options {
     position: absolute;
     top: 100%;
+    width: 100%;
     z-index: 100;
     background-color: white;
     text-align: left;

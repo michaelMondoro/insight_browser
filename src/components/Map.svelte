@@ -8,6 +8,13 @@
 
 	let map;
 	let mapData;
+	let DefaultIcon = L.icon({
+		iconUrl: "../public/marker-icon.png",
+		shadowUrl: "../public/marker-shadow.png",
+		iconSize: [24,36],
+      	iconAnchor: [12,36]
+	});
+	L.Marker.prototype.options.icon = DefaultIcon;
 
 	async function load() {
 		var latlngs = [];
@@ -23,6 +30,7 @@
 				let hostData = mapData[host];
 				let lat = hostData.geo.coordinates.latitude + (Math.random() * (.01 - .02) + .02)
 				let long = hostData.geo.coordinates.longitude + (Math.random() * (.01 - .02) + .02)
+				
 				var marker = L.marker([lat, long])
 				marker.bindPopup(`<b>${host} (${mapData[host].requests.length})</b> <br>[${hostData.ip}]`)
 				marker.bindTooltip(`<b>${host}</b>`);
@@ -40,7 +48,12 @@
 				marker.bindTooltip(`<b>${site}</b><br>` + siteGeo.city + ", " + siteGeo.country)
 				marker.addTo(map);
 
-				// draw lines
+				// line for initial request
+				var lineCoords = [[siteGeo.coordinates.latitude, siteGeo.coordinates.longitude],[data.location.coordinates.latitude, data.location.coordinates.longitude]];
+				var polyline = L.polyline(lineCoords, {color: 'red', weight: 2})
+				polyline.bindTooltip(`initial request to <b>${site}</b>`, {sticky: true})
+				polyline.addTo(map);
+				// draw lines for secondary requests
 				for (let i in latlngs) {
 					const latlng = [latlngs[i][1], latlngs[i][2]]
 					var lineCoords = [[siteGeo.coordinates.latitude, siteGeo.coordinates.longitude],latlng];
@@ -83,3 +96,9 @@
 		<div id="map" style="height: 100%; box-shadow: rgb(183, 179, 179) 1px 1px 7px;"></div>
 	</div>
 </div>
+
+<style>
+.div-icon {
+	font-size: 3em;
+}
+</style>

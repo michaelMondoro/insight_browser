@@ -18,7 +18,6 @@
         <h4 class="name">ip address</h4><h4>{data.userIP} </h4>
         <h4 class="name">location</h4><h4>{data.location.city + ", " + data.location.country}</h4>   
         <h4 class="name">operating system</h4><h4>{window.navigator.userAgentData.platform}</h4>
-        <h4 class="name">mobile?</h4><h4>{window.navigator.userAgentData.mobile}</h4>
     </div>
 </div>
 
