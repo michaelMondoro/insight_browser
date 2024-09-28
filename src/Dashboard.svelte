@@ -3,6 +3,7 @@
     import Header from "./components/Header.svelte";
     import Loader from "./components/Loader.svelte";
     import SitesPage from "./SitesPage.svelte";
+    import HelpPage from "./HelpPage.svelte";
 
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
@@ -31,7 +32,7 @@
             {:else if selectedPage === "Explore"}
                 <SitesPage data={data} />
             {:else if selectedPage === "Help"}
-                <h3>Help</h3>
+                <HelpPage />
             {/if}
         {:else}
             <Loader /> 

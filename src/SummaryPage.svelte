@@ -2,14 +2,12 @@
     import { fade } from "svelte/transition";
     import Map from "./components/Map.svelte";
     import Chart from "./components/Chart.svelte";
+    import PageTitle from "./components/PageTitle.svelte";
     
     export let data;
 </script>
 <div in:fade={{ duration: 800 }} style="width: 90%; text-align:center">
-    <div style="width: 100%; text-align:left">
-        <h2>Overview</h2>
-        <p class="subheading">your browsing session at a glance 🕶</p>
-    </div>
+    <PageTitle title={'Overview'} subheading={'your browsing session at a glance 🕶'}/>
 
     <div class="stats3">
         <p class="stat">
@@ -34,13 +32,6 @@
 
 </div>
 <style>
-h2 {
-    margin-bottom: 0;
-}
-.subheading {
-    color:rgb(115, 113, 113);
-    margin: 0;
-}
 .stats3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
