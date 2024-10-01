@@ -13,7 +13,7 @@
 
     function selectSite(event) {
         selectedSite = event.detail;
-        siteData = data.hosts[selectedSite];
+        siteData = data.sitesVisited[selectedSite];
     }
 </script>
 <div in:fade={{ duration: 800 }} class="container">
@@ -33,7 +33,7 @@
                     <p><b>{site}</b> in turn - sent HTTP requests to <u>{Object.keys(data.sitesVisited[selectedSite].externalRequests).length}</u> other websites/servers</p>
                 </div>
             </div>
-            <Map type="site" data={data} site={selectedSite}/>
+            <Map data={data} site={selectedSite}/>
         {/if}
     {/each}
 </div>

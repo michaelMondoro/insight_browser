@@ -69,50 +69,12 @@ class Session {
       }
     }
 
-    updateHostStatusCode(hostname, request) {
-      if (this.hosts[hostname]) {
-        if (this.hosts[hostname].stats.statusCodes.hasOwnProperty(request.statusCode)) {
-          this.hosts[hostname].stats.statusCodes[request.statusCode] += 1;
-        } else {
-          this.hosts[hostname].stats.statusCodes[request.statusCode] = 1; 
-        }
-      }
-    }
-
-    updateHostResources(hostname, request) {
-      if (this.hosts[hostname]) {
-        if (this.hosts[hostname].stats.resources.hasOwnProperty(request.resourceType)) {
-          this.hosts[hostname].stats.resources[request.resourceType] += 1;
-        } else {
-          this.hosts[hostname].stats.resources[request.resourceType] = 1; 
-        }
-      } 
-    }
 
     addRequest(data) {
       // update session data
       var hostname = data.host.hostname;
       var request = data.request;
       var host = data.host;
-
-      if (this.hosts[hostname]) {
-        this.hosts[hostname].requests.push(request);
-      } else {
-        this.hosts[hostname] = { 
-          geo: host.geo,
-          asn: host.asn,
-          ip: host.ip,
-          requests: [request],
-          stats: {
-            totalRequests: 0,
-            statusCodes: {},
-            resources: {}
-          }
-        };
-      }      
-      this.updateHostStatusCode(hostname, request);
-      this.updateHostResources(hostname, request);
-      this.hosts[hostname].stats.totalRequests += 1;
       
       this.updateResources(request);
       this.updateStatusCode(request);
@@ -126,6 +88,11 @@ class Session {
       }
 
       if (this.sitesVisited[requestHostname]) {
+        if (!this.sitesVisited[requestHostname].geo) {
+          this.sitesVisited[requestHostname].geo = host.geo;
+          this.sitesVisited[requestHostname].asn = host.asn;
+          this.sitesVisited[requestHostname].ip = host.ip;
+        }
         this.sitesVisited[requestHostname].requests.push(request);
       
       } else if (this.sitesVisited[referrerHostname]) {
@@ -143,13 +110,6 @@ class Session {
 
       }
     }
-    
-    getSessionData() {
-      return {
-        userIP: this.userIP,
-        active: this.active,
-        hosts: this.hosts
-      };
-    }
+  
 }
 module.exports = {Session};

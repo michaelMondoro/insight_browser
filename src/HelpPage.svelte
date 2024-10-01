@@ -6,6 +6,7 @@
 
 <div class="container">
     <PageTitle title={'Help'} subheading={'questions are good❓'}/>
+    <br>
     <div class="questions">
         <Accordion title={"What am I looking at?"} content={"that is a good question"}/>
         <Accordion title={"What are these 'Resources' that my browser is requesting?"} content={"hahhaa funny"}/>

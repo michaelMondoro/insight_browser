@@ -3,7 +3,6 @@
     import { onMount } from 'svelte';
 	
 	export let data;
-	export let type;
 	export let site = undefined;
 
 	let map;
@@ -19,11 +18,7 @@
 	async function load() {
 		var latlngs = [];
 
-		if (type === "full") {
-			mapData = data.hosts;
-		} else if (type === "site") {
-			mapData = data.sitesVisited[site].externalRequests;
-		}
+		mapData = data.sitesVisited[site].externalRequests;
 		
 		if (data !== null && map) {
 			for (let host in mapData) {
@@ -40,7 +35,7 @@
 			}
 
 			if (site) {
-				var siteGeo = data.hosts[site].geo;
+				var siteGeo = data.sitesVisited[site].geo;
 				var marker = L.circle([siteGeo.coordinates.latitude, siteGeo.coordinates.longitude],{
 					color:"blue", 
 					fillColor:"blue", 

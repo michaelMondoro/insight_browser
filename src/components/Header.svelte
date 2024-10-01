@@ -5,13 +5,13 @@
     function parseTime(time) {
         const h = Math.floor(time / 3600);
         const m = Math.floor(time / 60);
-        const sec = time % 60;
+        let sec = time % 60;
+        sec = sec.toFixed(2);
         return (h > 0) ? `${h}h ${m}m ${sec}s` : `${m}m ${sec}s` 
     }
 </script>
 
 <div in:fade={{ duration: 800 }} class="header">
-    <!-- <h3>Your Info</h3> -->
     <div class="grid">
         <h4 class="name">session time</h4><h4>{parseTime(data.time)}</h4>
         <h4 class="name">ip address</h4><h4>{data.userIP} </h4>

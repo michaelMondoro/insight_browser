@@ -1,6 +1,5 @@
 <script>
     import { fade } from "svelte/transition";
-    import Map from "./components/Map.svelte";
     import Chart from "./components/Chart.svelte";
     import PageTitle from "./components/PageTitle.svelte";
     
@@ -28,8 +27,6 @@
         <Chart title={"Status Codes"} labels={Object.keys(data.stats.statusCodes)} data={Object.values(data.stats.statusCodes)}/> 
     </div>
     <br>
-    <Map type="full" data={data}/>    
-
 </div>
 <style>
 .stats3 {
