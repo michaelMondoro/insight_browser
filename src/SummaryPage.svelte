@@ -19,7 +19,7 @@
         </p>
         <p class="stat">
             <span>Servers Hit</span>
-            <span class="content">{Object.keys(data.hosts).length}</span>
+            <span class="content">{data.hosts.length}</span>
         </p>
     </div>
     <div class="stats2">

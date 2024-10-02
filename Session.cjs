@@ -5,7 +5,7 @@ class Session {
       this.userIP = null;
       this.location = null;
       this.active = false;
-      this.hosts = {};
+      this.hosts = [];
       this.sitesVisited = {};
       this.time = 0;
       this.stats = {
@@ -79,6 +79,9 @@ class Session {
       this.updateResources(request);
       this.updateStatusCode(request);
       this.stats.totalRequests += 1;
+      if (!this.hosts.includes(hostname)) {
+        this.hosts.push(hostname);
+      }
 
       // update sites data
       let requestHostname = new URL(request.url).hostname;
