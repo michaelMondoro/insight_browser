@@ -31,7 +31,7 @@
                     <h4>{`${siteData.geo.city}, ${siteData.geo.country}`}</h4>
                 </div>
                 <div class="stats">
-                    <p>You visited <b>{selectedSite}</b> - sopting a total of <u>{data.sitesVisited[selectedSite].requests.length}</u> HTTP requests</p>
+                    <p>You visited <b>{selectedSite}</b> - sending a total of <u>{data.sitesVisited[selectedSite].requests.length}</u> HTTP requests</p>
                     <p><b>{site}</b> in turn - sent HTTP requests to <u>{Object.keys(data.sitesVisited[selectedSite].externalRequests).length}</u> other websites/servers</p>
                 </div>
                 <div class="options">
