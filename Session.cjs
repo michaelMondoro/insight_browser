@@ -69,7 +69,6 @@ class Session {
       }
     }
 
-
     addRequest(data) {
       // update session data
       var hostname = data.host.hostname;
@@ -107,7 +106,7 @@ class Session {
             geo: host.geo,
             asn: host.asn,
             ip: host.ip,
-            requests: [request] 
+            requests: [request]
           }
         }
 

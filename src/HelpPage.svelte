@@ -9,7 +9,7 @@
     <br>
     <div class="questions">
         <Accordion title={"What am I looking at?"} content={"that is a good question"}/>
-        <Accordion title={"What are these 'Resources' that my browser is requesting?"} content={"hahhaa funny"}/>
+        <Accordion title={"What are these 'Resources' that my browser is requesting?"} content={""}/>
         <Accordion title={"Uuhhhh 'Status Codes'? What are those? "} content={"fair"}/>
         <Accordion title={"My location is not displayed correctly . . . how is that determined?"} content={"f;asflasklj"}/>
     </div>

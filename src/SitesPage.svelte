@@ -11,7 +11,7 @@
     let dropdown = false
     let selectedSite;
     let siteData;
-    let selectedTab;
+    let selectedTab = "map";
 
     function selectSite(event) {
         selectedSite = event.detail;
@@ -41,17 +41,17 @@
                 </div>
                 <hr>
                 {#if selectedTab === "map"}
-                    <div class="legend">
+                    <div in:fade={{ duration: 800 }} class="legend">
                         <p>This is the map 🌎 of your trip to visit <b>{selectedSite}</b></p>
                     </div>
                     <Map data={data} site={selectedSite}/>
                 {:else if selectedTab === "requests"}
-                <div class="table_container">
+                <div in:fade={{ duration: 800 }} class="table_container">
                     <p>These are all the requests <b>you</b> 💻 sent to <b>{selectedSite}</b></p>
                     <Table type="requests" data={siteData} /> 
                 </div>
                 {:else if selectedTab === "external"}
-                <div class="table_container">
+                <div in:fade={{ duration: 800 }} class="table_container">
                     <p>These are all the sites <b>{selectedSite}</b> communicated 🚀 with when processing your requests</p>
                     <Table type="hosts" data={siteData} />
                 </div>

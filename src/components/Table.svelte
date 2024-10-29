@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
 
     export let data;
     export let type;
@@ -29,7 +30,7 @@
 
 </script>
 
-<table class="requests">
+<table in:fade={{duration: 800}} class="requests">
     {#if type === "requests" && requests}
         <tr>
             <th on:click={() => sortRequests('resourceType')}>type</th>

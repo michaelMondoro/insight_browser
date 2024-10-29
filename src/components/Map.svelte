@@ -1,7 +1,8 @@
 <script>
 	import L from 'leaflet';
     import { onMount } from 'svelte';
-	
+	import { fade } from "svelte/transition";
+
 	export let data;
 	export let site = undefined;
 
@@ -86,7 +87,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </svelte:head>
 
-<div style="width: 100%; height:40em; display:flex; justify-content:center;">
+<div in:fade={{duration: 800}} style="width: 100%; height:40em; display:flex; justify-content:center;">
 	<div style="width: 90%; height: 100%">
 		<div id="map" style="height: 100%; box-shadow: rgb(183, 179, 179) 1px 1px 7px;"></div>
 	</div>
