@@ -19,3 +19,13 @@ Get some insight into your digital life today.
 <hr>
 
 ![explore](https://github.com/user-attachments/assets/2f549dfe-31d8-4565-a9c8-4422bf413bc3)
+
+
+### Run Manually
+```
+git clone https://github.com/michaelMondoro/insight_browser.git
+
+cd insight_browser
+npm i
+npm run dev
+```
